@@ -28,13 +28,14 @@
         <h1 id="authTitle">Entre na sua conta</h1>
         <p class="auth-description" id="authDescription">Acesse suas transcrições e continue de onde parou.</p>
         <div class="auth-notice" id="authNotice" role="status" aria-live="polite" hidden></div>
-      <form id="authForm">
+        <form id="authForm">
           <label id="nameField" hidden>Nome<input name="name" autocomplete="name" maxlength="80" placeholder="Como devemos chamar você?"></label>
           <label id="emailField">E-mail<input name="email" type="email" autocomplete="email" required placeholder="voce@exemplo.com"></label>
           <label id="passwordField">Senha<span class="password-control"><input name="password" type="password" autocomplete="current-password" minlength="8" required placeholder="Sua senha"><button type="button" class="password-toggle" data-password-toggle="password" aria-label="Mostrar senha" title="Mostrar senha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.5"/></svg></button></span><small class="field-hint" id="passwordHint">Use pelo menos 8 caracteres.</small></label>
           <label id="confirmField" hidden>Confirmar nova senha<span class="password-control"><input name="confirmPassword" type="password" autocomplete="new-password" minlength="8" placeholder="Digite a senha novamente"><button type="button" class="password-toggle" data-password-toggle="confirmPassword" aria-label="Mostrar confirmação da senha" title="Mostrar senha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.5"/></svg></button></span></label>
           <button class="auth-submit" id="authSubmit" type="submit">Entrar <span aria-hidden="true">→</span></button>
         </form>
+        <button class="auth-resend" id="resendConfirmation" type="button" hidden>Não recebeu o e-mail? Reenviar confirmação</button>
         <nav class="auth-links" aria-label="Opções da conta">
           <a id="secondaryLink" href="/register">Criar uma conta</a>
           <a id="forgotLink" href="/forgot-password">Esqueci minha senha</a>

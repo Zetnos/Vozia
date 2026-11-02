@@ -2,6 +2,8 @@
   const config = window.VOZIA_CONFIG || {};
   const base = String(config.supabaseUrl || '').replace(/\/+$/, '');
   const key = config.supabasePublishableKey || '';
+  const isLocalHost = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  const redirectBase = String(isLocalHost ? location.origin : (config.authRedirectBase || location.origin)).replace(/\/+$/, '');
   const storageKey = 'vozia.auth.session';
 
   function readSession() {
@@ -19,6 +21,7 @@
     if (!response.ok) {
       const error = new Error(data.msg || data.message || data.error_description || data.error || `Solicitação recusada (${response.status}).`);
       error.status = response.status;
+      error.code = data.code || data.error_code || data.error || '';
       throw error;
     }
     return data;
@@ -70,7 +73,7 @@
     saveSession,
     validSession,
     signUp: async ({ email, password, name }) => {
-      const result = await auth(`signup?redirect_to=${encodeURIComponent(`${location.origin}/login?confirmed=1`)}`, {
+      const result = await auth(`signup?redirect_to=${encodeURIComponent(`${redirectBase}/login?confirmed=1`)}`, {
         email,
         password,
         data: { full_name: name }
@@ -78,8 +81,12 @@
       if (result.access_token) saveSession(result);
       return result;
     },
+    resendSignupConfirmation: email => auth(`resend?redirect_to=${encodeURIComponent(`${redirectBase}/login?confirmed=1`)}`, {
+      email,
+      type: 'signup'
+    }),
     signIn: async ({ email, password }) => saveSession(await auth('token?grant_type=password', { email, password })),
-    recover: email => auth(`recover?redirect_to=${encodeURIComponent(`${location.origin}/reset-password`)}`, { email }),
+    recover: email => auth(`recover?redirect_to=${encodeURIComponent(`${redirectBase}/reset-password`)}`, { email }),
     updatePassword: async password => {
       const session = await validSession();
       if (!session) throw new Error('O link de recuperação expirou. Solicite outro e-mail.');
