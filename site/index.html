@@ -12,10 +12,7 @@
 <style>
 body{font-family:"DM Sans",Inter,system-ui,-apple-system,"Segoe UI",sans-serif}h1,h2,h3,.logo{font-family:Manrope,"DM Sans",sans-serif}h1{letter-spacing:-.035em}h2{letter-spacing:-.025em}.hero-note span{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px var(--lime)}.chip-icon,.chip-check{display:grid;place-items:center;color:var(--lime)}.chip-icon svg,.chip-check svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.hero-note{display:flex;align-items:center;gap:9px}.topbar .logo{color:var(--white)}.topbar .logo:hover,.footer .logo:hover{color:var(--lime)}:focus-visible{outline:2px solid var(--lime);outline-offset:4px}::selection{background:var(--lime);color:#11160d}
 </style>
-<style>
-.demo-heading{max-width:700px;margin:0 auto 34px;text-align:center}.demo-heading h2{margin:10px 0}.demo-heading>p{margin:0;color:var(--muted)}.demo-disclaimer{display:inline-flex;align-items:center;gap:7px;margin-top:13px;color:#7f897f;font-size:11px}.demo-disclaimer i{width:6px;height:6px;border-radius:50%;background:var(--lime);box-shadow:0 0 9px #b5f56b66}.demo-shell{overflow:hidden;border:1px solid #283028;border-radius:16px;background:linear-gradient(145deg,#111512,#0b0e0c);box-shadow:0 24px 70px #0007,0 0 42px #a6f1560b}.demo-topline{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:1px solid #ffffff0c}.demo-brand{display:flex;align-items:center;gap:8px}.demo-brand .mark{height:17px;gap:2px}.demo-brand .mark i{width:2px}.demo-brand .mark i:nth-child(1),.demo-brand .mark i:nth-child(5){height:6px}.demo-brand .mark i:nth-child(2),.demo-brand .mark i:nth-child(4){height:12px}.demo-brand .mark i:nth-child(3){height:17px}.demo-brand b{font:700 14px Manrope,sans-serif;letter-spacing:-.4px}.demo-brand b span{color:var(--lime)}.demo-brand small{margin-left:12px;padding-left:12px;border-left:1px solid #343a34;color:#768076;font-size:9px;letter-spacing:.1em}.demo-ready{display:flex;align-items:center;gap:7px;color:#aab59f;font-size:10px}.demo-ready i{width:6px;height:6px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px #b5f56b77}.demo-tabs{display:flex;gap:5px;padding:13px 18px 0;border-bottom:1px solid #ffffff0c}.demo-tab{position:relative;display:flex;align-items:center;gap:9px;padding:11px 13px 13px;border:0;background:transparent;color:#90998f;font-size:11px;cursor:pointer}.demo-tab span{color:#586057;font-size:9px}.demo-tab:hover,.demo-tab.active{color:#f2f5ef}.demo-tab.active span{color:var(--lime)}.demo-tab.active:after{position:absolute;right:12px;bottom:-1px;left:12px;height:2px;border-radius:2px;background:var(--lime);content:"";box-shadow:0 0 12px #b5f56b77}.demo-panel{min-height:310px;padding:25px;animation:demoAppear .45s cubic-bezier(.16,1,.3,1) both}.demo-upload{max-width:780px;margin:0 auto}.demo-file{display:flex;align-items:center;gap:13px;padding:15px 16px;border:1px solid #282f29;border-radius:10px;background:#0d100e}.demo-file-icon{width:40px;height:42px;display:grid;place-items:center;border:1px solid #394332;border-radius:8px;background:#172014;color:var(--lime)}.demo-file-icon svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}.demo-file-name{min-width:0;flex:1}.demo-file-name b{display:block;font-size:12px;font-weight:600}.demo-file-name small{display:block;margin-top:3px;color:#7c867d;font-size:10px}.demo-file-size{color:#bac7a7;font-size:10px}.demo-status{display:flex;justify-content:space-between;gap:12px;margin:22px 2px 11px;color:#9ca59a;font-size:10px}.demo-status b{color:var(--lime);font-weight:600}.chunk-track{display:grid;grid-template-columns:repeat(8,1fr);gap:7px}.chunk-block{height:30px;display:grid;place-items:center;border:1px solid #343b31;border-radius:5px;background:#111511;color:#727d70;font:9px ui-monospace,monospace;transition:background .35s,border-color .35s,color .35s,box-shadow .35s}.chunk-block.done{border-color:#779a42;background:#25331b;color:#d5f695;box-shadow:0 0 13px #b5f56b18}.chunk-block.current{border-color:var(--lime);background:#31451e;color:#f0ffd1;box-shadow:0 0 18px #b5f56b48}.demo-progress{height:4px;margin-top:14px;overflow:hidden;border-radius:5px;background:#252d24}.demo-progress span{display:block;width:0;height:100%;border-radius:5px;background:var(--lime);box-shadow:0 0 12px #b5f56b99;transition:width .55s cubic-bezier(.16,1,.3,1)}.demo-foot{display:flex;align-items:center;justify-content:space-between;margin-top:12px;color:#758075;font-size:10px}.demo-foot strong{color:#aeb89f;font-weight:500}.demo-sync{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:stretch}.demo-media{position:relative;min-height:245px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:16px;border:1px solid #272f27;border-radius:11px;background:radial-gradient(ellipse at 45% 55%,#22301966,transparent 60%),#0b0e0c}.demo-media-title{display:flex;align-items:center;justify-content:space-between;color:#aab3a8;font-size:10px}.demo-media-title b{color:#edf2e7;font-size:11px;font-weight:550}.demo-media-title span{color:#768073;font-variant-numeric:tabular-nums}.demo-wave{height:94px;display:flex;align-items:center;justify-content:center;gap:3px}.demo-wave-bar{width:3px;height:var(--bar-height);border-radius:3px;background:linear-gradient(0deg,#618637,var(--lime));opacity:.7;transform-origin:center;animation:demoWave .85s ease-in-out infinite alternate;animation-delay:var(--delay)}.demo-player-controls{display:flex;align-items:center;gap:11px}.demo-play{width:30px;height:30px;display:grid;place-items:center;border:1px solid #d4f77e;border-radius:50%;background:var(--lime);color:#13180d;cursor:pointer}.demo-play svg{width:12px;height:12px;fill:currentColor;stroke:currentColor;stroke-width:1.4}.demo-track{height:3px;flex:1;overflow:hidden;border-radius:4px;background:#313a2e}.demo-track span{display:block;width:35%;height:100%;background:var(--lime);box-shadow:0 0 9px #b5f56b66;transition:width .35s}.demo-duration{color:#9ca698;font:10px ui-monospace,monospace}.demo-transcript{display:flex;flex-direction:column;gap:9px}.demo-transcript-row{display:grid;grid-template-columns:72px 1fr;gap:11px;align-items:start;padding:13px 12px;border:1px solid #252c25;border-radius:8px;background:#0d100e;color:#abb4a9;font-size:11px;line-height:1.55;transition:background .25s,border-color .25s,color .25s}.demo-transcript-row time{padding-top:1px;color:#859180;font:9px ui-monospace,monospace}.demo-transcript-row.active{border-color:#536b37;background:#182015;color:#f0f4e8;box-shadow:0 0 22px #b5f56b0c}.demo-transcript-row.active time{color:var(--lime)}.demo-export{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;max-width:800px;margin:0 auto}.srt-preview{margin:0;padding:20px;border:1px solid #293128;border-radius:10px;background:#0a0d0b;color:#c4d3b0;font:11px/1.8 ui-monospace,monospace;white-space:pre-wrap}.export-controls{display:grid;gap:8px;min-width:145px}.export-controls button{min-height:38px;padding:0 12px;border:1px solid #35402e;border-radius:7px;background:#151b13;color:#cbd7bc;font-size:10px;cursor:pointer;transition:border .2s,background .2s}.export-controls button:hover{border-color:#89b752;background:#1c2816}.export-controls button:first-child{border-color:#b5f56b;background:var(--lime);color:#12170d;font-weight:700}.export-controls button:first-child:hover{background:#caff89}.export-notice{min-height:15px;margin:0;color:#9fb780;font-size:10px}.demo-panels-hidden{display:none}@keyframes demoAppear{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}@keyframes demoWave{from{transform:scaleY(.32);opacity:.4}to{transform:scaleY(1);opacity:1}}@media(max-width:700px){.demo-panel{min-height:0;padding:17px}.demo-sync{grid-template-columns:1fr}.demo-media{min-height:200px}.demo-wave{height:75px}.demo-transcript-row{grid-template-columns:67px 1fr}.demo-export{grid-template-columns:1fr}.export-controls{grid-template-columns:1fr 1fr;min-width:0}.export-notice{grid-column:1/-1}.chunk-block{height:26px;font-size:8px}.demo-tab{padding:10px 9px 12px;gap:6px;font-size:10px}.demo-tab span{display:none}}@media(max-width:420px){.demo-topline{padding:0 13px}.demo-brand small{margin-left:2px;padding-left:8px;font-size:8px}.demo-ready{font-size:9px}.demo-tabs{justify-content:space-between;padding-right:8px;padding-left:8px}.demo-tab{padding-right:7px;padding-left:7px}.demo-status{font-size:9px}.chunk-track{gap:4px}.chunk-block{font-size:7px}.demo-foot{font-size:9px}.demo-transcript-row{font-size:10px;grid-template-columns:60px 1fr;gap:8px}.demo-export{gap:12px}}
-.demo-inline-action{padding:0;border:0;background:none;color:var(--lime);font:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer}.demo-inline-action:hover{color:#d6ff9d}.demo-wave.paused .demo-wave-bar{animation-play-state:paused}
-</style>
+
 <style>
 .wave-line{animation:waveGlow 3.6s ease-in-out infinite alternate;transform-origin:center;transform-box:fill-box}
 .wave-card:before{animation:waveField 18s linear infinite}
@@ -34,34 +31,17 @@ body{font-family:"DM Sans",Inter,system-ui,-apple-system,"Segoe UI",sans-serif}h
 @media(max-width:760px){.step h3,.step p{max-width:82%}.step-icon{right:0;bottom:-14px;width:96px;height:96px}.step-icon svg{width:86px;height:86px}}
 @media(prefers-reduced-motion:reduce){.step-icon{transition:none}}
 </style>
+
 <style>
-.demo-dashboard{min-height:310px;display:grid;grid-template-columns:174px minmax(0,1fr);border:1px solid #293129;border-radius:12px;background:#0c100d;overflow:hidden}
-.demo-sidebar{display:flex;flex-direction:column;gap:6px;padding:17px 12px;border-right:1px solid #ffffff0d;background:#0a0d0b}
-.demo-sidebar-label{padding:0 9px 10px;color:#657063;font-size:8px;letter-spacing:.15em}
-.demo-side-link{display:flex;align-items:center;gap:9px;padding:9px;border:1px solid transparent;border-radius:7px;background:transparent;color:#899387;text-align:left;font:inherit;font-size:10px;cursor:pointer}
-.demo-side-link svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.demo-side-link.active{border-color:#293326;background:#151c13;color:#dcebd0}.demo-side-link.active svg{color:var(--lime)}.demo-side-link:hover{color:var(--lime)}
-.demo-dashboard-main{min-width:0;padding:21px}
-.demo-dashboard-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}
-.demo-dashboard-title small{color:#81907e;font-size:8px;letter-spacing:.13em}.demo-dashboard-title h3{margin:3px 0 0;font-size:19px;letter-spacing:-.035em}
-.demo-new-upload{display:inline-flex;align-items:center;gap:7px;padding:8px 10px;border:1px solid #b5f56b;border-radius:7px;background:#b5f56b;color:#11160d;font-size:9px;font-weight:700;white-space:nowrap}
-.demo-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-bottom:12px}
-.demo-metric{min-width:0;padding:11px 12px;border:1px solid #252d26;border-radius:8px;background:#101411}.demo-metric span{display:block;color:#899489;font-size:8px}.demo-metric b{display:block;margin-top:4px;color:#f2f5ef;font-size:18px;font-weight:600;letter-spacing:-.04em}.demo-metric small{display:block;margin-top:2px;color:#9eb27f;font-size:8px}
-.demo-home-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:10px}
-.demo-home-card{min-width:0;padding:13px;border:1px solid #252d26;border-radius:9px;background:#0f130f}.demo-home-card-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:11px;color:#e8eee4;font-size:10px;font-weight:600}.demo-home-card-head span{color:#7d887c;font-size:8px;font-weight:400}
-.demo-recent-file{display:flex;align-items:center;gap:9px;padding:9px;border:1px solid #273027;border-radius:7px;background:#0b0f0c}.demo-mini-file-icon{width:29px;height:30px;display:grid;place-items:center;border:1px solid #34432c;border-radius:6px;color:var(--lime)}.demo-mini-file-icon svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}.demo-recent-copy{min-width:0;flex:1}.demo-recent-copy b{display:block;overflow:hidden;color:#e7ece4;font-size:9px;text-overflow:ellipsis;white-space:nowrap}.demo-recent-copy small{display:block;margin-top:3px;color:#7f897e;font-size:8px}.demo-job-state{display:flex;align-items:center;gap:5px;color:var(--lime);font-size:8px;white-space:nowrap}.demo-job-state i{width:5px;height:5px;border-radius:50%;background:var(--lime);box-shadow:0 0 8px var(--lime)}
-.demo-dash-upload .demo-status{margin:1px 0 9px;font-size:8px}.demo-dash-upload .chunk-track{gap:4px}.demo-dash-upload .chunk-block{height:23px;font-size:7px}.demo-dash-upload .demo-progress{margin-top:9px}.demo-dash-upload .demo-foot{margin-top:8px;font-size:8px}
-@media(max-width:760px){.demo-dashboard{grid-template-columns:1fr}.demo-sidebar{display:none}.demo-dashboard-main{padding:15px}.demo-home-grid{grid-template-columns:1fr}}
-@media(max-width:440px){.demo-dashboard-title h3{font-size:16px}.demo-new-upload{padding:7px;font-size:8px}.demo-metric{padding:9px}.demo-metric b{font-size:16px}.demo-home-card{padding:10px}}
-@media(prefers-reduced-motion:reduce){.demo-dashboard *{scroll-behavior:auto}}
+.workspace-entry{padding-top:34px;padding-bottom:54px}.workspace-entry-card{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:28px 32px;border:1px solid #2b332b;border-radius:14px;background:radial-gradient(ellipse at 10% 50%,#b5f56b0b,transparent 45%),linear-gradient(145deg,#111512,#0d100e)}.workspace-entry-card h2{margin:8px 0;font:600 clamp(22px,3vw,30px)/1.2 Manrope,sans-serif;letter-spacing:-.04em}.workspace-entry-card p{max-width:560px;margin:0;color:#99a198;font-size:13px}.workspace-entry-card .btn{flex:0 0 auto}.workspace-entry-link{text-decoration:none}@media(max-width:650px){.workspace-entry-card{align-items:flex-start;flex-direction:column;padding:23px 19px;gap:18px}.workspace-entry-card .btn{width:100%;justify-content:center}}
 </style>
 </head>
 <body>
 <header class="topbar wrap">
   <a class="logo" href="./" aria-label="Vozia, início"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>Vozia</a>
   <button class="menu-toggle" id="navToggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="siteNav"><span></span><span></span></button>
-  <nav class="nav" id="siteNav" aria-label="Navegação principal"><a href="#transcricao">Produtos</a><a href="#como-funciona">Soluções</a><a href="#precos">Preços</a><a href="#recursos">Recursos</a><a href="#demo-title">Dashboard</a><a href="/login">Entrar</a></nav>
-  <a class="btn top-cta primary" href="/register">Criar conta <span aria-hidden="true">↗</span></a>
+  <nav class="nav" id="siteNav" aria-label="Navegação principal"><a href="#como-funciona">Produtos</a><a href="#como-funciona">Soluções</a><a href="#precos">Preços</a><a href="#precos">Recursos</a><a data-workspace-entry href="/login?next=%2Fapp">Dashboard</a><a href="/login">Entrar</a></nav>
+  <a class="btn top-cta primary workspace-entry-link" data-workspace-entry href="/register">Criar conta <span aria-hidden="true">↗</span></a>
 </header>
 <main id="inicio">
   <section class="hero wrap">
@@ -69,13 +49,13 @@ body{font-family:"DM Sans",Inter,system-ui,-apple-system,"Segoe UI",sans-serif}h
       <span class="eyebrow"><b></b> Transcrição de áudio e vídeo</span>
       <h1>Áudio entra.<br><em>Inteligência sai.</em></h1>
       <p>Transforme gravações em transcrições precisas, organizadas e fáceis de pesquisar.</p>
-      <div class="hero-actions"><a class="btn primary" href="#transcricao">Enviar uma gravação <span aria-hidden="true">→</span></a><a class="btn" href="#como-funciona">Como funciona</a></div>
+      <div class="hero-actions"><a class="btn primary workspace-entry-link" data-workspace-entry href="/register">Começar grátis <span aria-hidden="true">→</span></a><a class="btn" href="#como-funciona">Como funciona</a></div>
       <div class="hero-note"><span>●</span> Whisper local · arquivos grandes enviados em partes</div>
     </div>
     <div class="hero-visual" aria-label="Onda pontilhada de áudio ilustrativa">
       <div class="halo"></div>
       <div class="wave-card"><div class="wave-label">VOZIA · SOM EM TEXTO</div><div class="wave-time">SINAL DE ÁUDIO</div><svg class="dot-wave" viewBox="0 0 640 250" preserveAspectRatio="none" aria-hidden="true"><path class="wave-line" d="M0 125 C45 125 45 80 90 80 S135 180 180 180 S225 55 270 55 S315 160 360 160 S405 90 450 90 S495 190 540 190 S595 110 640 110"/><g id="dots"></g></svg></div>
-      <div class="audio-chip"><span class="chip-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h2l2-6 4 12 4-12 3 6h3"/></svg></span><div><strong>Prévia da transcrição</strong><small>Exemplo ilustrativo da interface</small></div><span class="chip-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 5 5L20 7"/></svg></span></div>
+      <div class="audio-chip"><span class="chip-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h2l2-6 4 12 4-12 3 6h3"/></svg></span><div><strong>Áudio convertido em texto</strong><small>Organizado para localizar e revisar</small></div><span class="chip-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12 5 5L20 7"/></svg></span></div>
     </div>
   </section>
 
@@ -90,49 +70,19 @@ body{font-family:"DM Sans",Inter,system-ui,-apple-system,"Segoe UI",sans-serif}h
     </div>
   </section>
 
-  <section class="section transcribe-section" aria-labelledby="upload-title">
-    <div class="wrap transcribe-layout">
-      <div class="transcribe-copy"><span class="kicker">COMECE POR UMA GRAVAÇÃO</span><h2>Uma conversa importante merece ser encontrada.</h2><p>Envie um arquivo e acompanhe cada fala com marcação de tempo. Áudio e vídeo são processados pelo servidor local da Vozia.</p><span class="local-note"><i></i> Whisper executado localmente</span></div>
-      <form class="upload-panel" id="transcricao" aria-labelledby="upload-title">
-        <div class="upload-heading"><div><h2 id="upload-title">Comece por um arquivo</h2><p>Escolha uma gravação para iniciar.</p></div><span class="local-indicator"><i></i> Whisper local</span></div>
-        <div class="file-drop" id="fileDrop">
-          <input id="landingFile" class="visually-hidden" type="file" accept="audio/*,video/*,.mp3,.wav,.m4a,.mp4,.aac,.ogg,.flac,.webm" aria-describedby="fileFormats uploadStatus">
-          <svg class="upload-symbol" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 21V5m0 0-6 6m6-6 6 6M6 19v7h20v-7"/></svg>
-          <p class="drop-title" id="dropTitle">Arraste o arquivo até aqui</p>
-          <p class="drop-subtitle">ou <button type="button" class="choose-file" id="chooseFile">escolha no computador</button></p>
-          <p class="file-formats" id="fileFormats">MP3, WAV, M4A, MP4, AAC, OGG, FLAC e WebM</p>
-          <div class="selected-file" id="selectedFile" hidden><span class="selected-file-mark" aria-hidden="true"></span><span><b id="selectedName"></b><small id="selectedMeta"></small></span><button type="button" id="clearFile" aria-label="Remover arquivo selecionado">Remover</button></div>
-        </div>
-        <div class="upload-options"><label for="landingLanguage">Idioma da gravação<select id="landingLanguage"><option value="pt-BR">Português (Brasil)</option><option value="en-US">English (US)</option><option value="es-ES">Español</option><option value="fr-FR">Français</option><option value="de-DE">Deutsch</option><option value="it-IT">Italiano</option><option value="ja-JP">日本語</option><option value="auto">Detectar automaticamente</option></select></label><button class="submit-upload" id="submitUpload" type="submit" disabled>Transcrever arquivo <span aria-hidden="true">→</span></button></div>
-        <p class="upload-status" id="uploadStatus" role="status" aria-live="polite">Arquivos grandes são enviados em partes de 8 MB.</p><div class="upload-progress" id="uploadProgress" hidden><span id="uploadProgressBar"></span></div>
-      </form>
-    </div>
+  <section class="section workspace-entry" id="transcricao">
+    <div class="wrap workspace-entry-card"><div><span class="kicker">SEU ESPAÇO VOZIA</span><h2>Pronto para transformar uma gravação?</h2><p>Acesse sua conta para enviar arquivos e acompanhar cada etapa da transcrição.</p></div><a class="btn primary workspace-entry-link" data-workspace-entry href="/login?next=%2Fapp">Acessar minha conta <span aria-hidden="true">→</span></a></div>
   </section>
-
   <section class="section" id="precos">
     <div class="wrap"><div class="section-head"><span class="kicker">Recursos disponíveis</span><h2>Feita para gravações de verdade.</h2><p>O essencial para ir do arquivo ao texto, no mesmo espaço de trabalho.</p></div>
       <div class="stats"><div class="stat"><strong>100<em> MB+</em></strong><span>envio em partes para arquivos grandes</span></div><div class="stat"><strong>7</strong><span>idiomas e detecção automática</span></div><div class="stat"><strong>8</strong><span>formatos de áudio e vídeo</span></div><div class="stat"><strong>3</strong><span>saídas: SRT, VTT e texto</span></div></div>
     </div>
   </section>
 
-    <section class="section demo-section" id="recursos" aria-labelledby="demo-title">
-    <div class="wrap">
-      <div class="demo-heading"><span class="kicker">POR DENTRO DA VOZIA</span><h2 id="demo-title">Do primeiro envio à legenda pronta.</h2><p>Explore uma prévia interativa do fluxo de transcrição.</p><span class="demo-disclaimer"><i></i> Conteúdo demonstrativo; os exemplos não são uma transcrição real.</span></div>
-      <div class="demo-shell">
-        <div class="demo-topline"><div class="demo-brand"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><b>vozia<span>.</span></b><small>ESPAÇO DE TRABALHO</small></div><div class="demo-ready"><i></i> Whisper local</div></div>
-        <div class="demo-tabs" role="tablist" aria-label="Prévia das etapas">
-          <button class="demo-tab active" id="tab-dashboard" type="button" role="tab" aria-selected="true" aria-controls="demoPanel" data-demo-step="dashboard"><span>01</span> Dashboard</button>
-          <button class="demo-tab" id="tab-sync" type="button" role="tab" aria-selected="false" aria-controls="demoPanel" data-demo-step="sync" tabindex="-1"><span>02</span> Revisão sincronizada</button>
-          <button class="demo-tab" id="tab-export" type="button" role="tab" aria-selected="false" aria-controls="demoPanel" data-demo-step="export" tabindex="-1"><span>03</span> SRT e exportação</button>
-        </div>
-        <div class="demo-panel" id="demoPanel" role="tabpanel" aria-labelledby="tab-dashboard" tabindex="0"></div>
-      </div>
-    </div>
-  </section>
-</main>
+  </main>
 <footer class="footer wrap" id="footer">
   <a class="logo" href="./" aria-label="Vozia, início"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>Vozia</a>
-  <nav class="footer-links" aria-label="Links institucionais"><a href="#recursos">Meu espaço</a><a href="#precos">Planos</a><a href="#como-funciona">Ajuda</a><a href="#footer">Perfil</a><a href="#demo-title">Dashboard</a></nav>
+  <nav class="footer-links" aria-label="Links institucionais"><a data-workspace-entry href="/login?next=%2Fapp">Meu espaço</a><a href="#precos">Recursos</a><a href="#como-funciona">Ajuda</a><a href="/login">Perfil</a><a data-workspace-entry href="/login?next=%2Fapp">Dashboard</a></nav>
   <span class="copyright">© 2026 Vozia · Transcrição local de áudio e vídeo</span>
 </footer>
 <script>
@@ -147,6 +97,6 @@ startWave();document.addEventListener('visibilitychange',startWave);motionPrefer
 </script>
 <script src="vozia-config.js"></script>
 <script src="supabase-client.js"></script>
-<script src="landing.js?v=5"></script>
+<script src="landing.js?v=6"></script>
 </body></html>
 

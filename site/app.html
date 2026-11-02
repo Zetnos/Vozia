@@ -1,20 +1,85 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#090c0a">
-  <title>Meu espaço — Vozia</title><link rel="icon" href="/vozia-icon.svg" type="image/svg+xml"><link rel="stylesheet" href="/auth.css">
-  <style>
-    body{min-height:100vh}.workspace{width:min(1080px,calc(100% - 36px));margin:40px auto}.top{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:28px}.top .auth-brand{margin:0}.actions{display:flex;align-items:center;gap:10px}.actions a,.actions button,.job-link{border:1px solid #2d382b;border-radius:9px;background:#131814;color:#e8eee7;padding:11px 15px;text-decoration:none;font:inherit;cursor:pointer}.actions .primary,.job-link{background:#cbee3f;color:#11160d;border-color:#cbee3f;font-weight:700}.welcome{margin:34px 0}.welcome h1{font-size:clamp(28px,5vw,42px);margin:6px 0}.muted{color:#a3aca2}.panel{border:1px solid #273027;background:#101411;border-radius:14px;padding:22px;margin-top:20px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.jobs{width:100%;border-collapse:collapse;margin-top:15px}.jobs th,.jobs td{text-align:left;padding:14px 10px;border-bottom:1px solid #273027}.jobs th{font-size:12px;color:#9ca69b}.status{color:#cbee3f}.empty{padding:30px;text-align:center;color:#a3aca2}.user-email{font-size:13px;color:#a3aca2}@media(max-width:650px){.top{align-items:flex-start;flex-direction:column}.actions{width:100%;flex-wrap:wrap}.jobs th:nth-child(3),.jobs td:nth-child(3){display:none}.panel{padding:14px}.jobs th,.jobs td{padding:11px 5px;font-size:13px}}
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080a09">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Dashboard · Vozia</title>
+  <link rel="icon" href="/vozia-icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/dashboard.css?v=1">
 </head>
 <body>
-  <main class="workspace">
-    <header class="top"><a class="auth-brand" href="/" aria-label="Vozia, início"><span class="brand-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>Vozia</a><nav class="actions"><a class="primary" href="/#transcricao">Nova transcrição <span aria-hidden="true">→</span></a><a id="adminLink" href="/admin" hidden>Administração</a><button id="signOut">Sair</button></nav></header>
-    <section class="welcome"><span class="auth-kicker">SEU ESPAÇO VOZIA</span><h1>Olá, <span id="displayName">…</span></h1><p class="muted user-email" id="userEmail"></p></section>
-    <section class="panel"><div class="panel-head"><div><h2>Suas transcrições</h2><p class="muted">Arquivos associados à sua conta.</p></div><span class="status" id="transcriptionCount">—</span></div><div id="jobList"><p class="empty">Carregando seu espaço…</p></div></section>
-    <section class="panel" id="transcriptPanel" hidden><div class="panel-head"><div><h2 id="transcriptTitle">Transcrição</h2><p class="muted" id="transcriptStatus">Aguardando processamento…</p></div><button class="job-link" id="downloadSrt" type="button" hidden>Baixar SRT</button></div><p class="muted" id="transcriptError" hidden></p><pre id="transcriptText" style="white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;line-height:1.8;color:#e8eee7;margin:18px 0 0"></pre></section>
-    <div class="auth-notice" id="appNotice" role="status" aria-live="polite" hidden></div>
-  </main>
-  <script src="/vozia-config.js"></script><script src="/supabase-client.js"></script><script src="/app.js"></script>
+  <div class="mobile-top">
+    <a class="logo" href="/" aria-label="Vozia, início"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>Vozia</a>
+    <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="sidebar">☰ Menu</button>
+  </div>
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Navegação do painel">
+      <a class="logo" href="/" aria-label="Vozia, início"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>Vozia</a>
+      <div class="nav-label">Espaço de trabalho</div>
+      <nav class="nav" aria-label="Navegação principal">
+        <a class="active" href="#dashboard" aria-current="page"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="5" rx="2"/><rect x="13" y="10" width="8" height="11" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/></svg>Dashboard</a>
+        <a href="#transcricoes"><svg viewBox="0 0 24 24"><path d="M5 3h10l4 4v14H5zM14 3v5h5M8 12h8M8 16h8"/></svg>Transcrições</a>
+        <a href="#transcricoes"><svg viewBox="0 0 24 24"><path d="M3 7h7l2 2h9v11H3zM3 7V4h7l2 3"/></svg>Arquivos</a>
+        <a href="#integracoes"><svg viewBox="0 0 24 24"><path d="M8 8V5a3 3 0 0 1 6 0v3m-4 8v3a3 3 0 0 0 6 0v-3M5 9h14v6H5z"/></svg>Integrações</a>
+        <a id="adminLink" href="/admin" hidden><svg viewBox="0 0 24 24"><path d="m8 8-4 4 4 4m8-8 4 4-4 4m-3-11-2 14"/></svg>API e administração</a>
+        <a href="#account"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.7 2.9-.2-.1a1.8 1.8 0 0 0-1.8 0l-.2.1h-3.4l-.1-.2a1.8 1.8 0 0 0-1.6-1h-.2l-2.9-1.7.1-.2a1.8 1.8 0 0 0 0-1.8l-.1-.2v-3.4l.2-.1a1.8 1.8 0 0 0 1-1.6v-.2l1.7-2.9.2.1a1.8 1.8 0 0 0 1.8 0l.2-.1h3.4l.1.2a1.8 1.8 0 0 0 1.6 1h.2l2.9 1.7-.1.2a1.8 1.8 0 0 0 0 1.8l.1.2z"/></svg>Configurações</a>
+      </nav>
+      <div class="side-bottom">
+        <div class="plan"><div class="plan-top"><span>Processamento</span><b id="serverBadge">Whisper</b></div><div class="meter"><i id="serverMeter"></i></div><small id="serverStatus">Verificando servidor…</small></div>
+        <div class="profile"><div class="avatar" id="userAvatar">V</div><div class="profile-copy"><strong id="displayName">Carregando conta…</strong><small id="userEmail"></small></div><button class="sign-out" id="signOut" type="button" title="Sair da conta" aria-label="Sair da conta">↗</button></div>
+      </div>
+    </aside>
+
+    <main class="main" id="dashboard">
+      <header class="head">
+        <div><h1>Dashboard</h1><p>Visão geral da sua atividade de transcrição.</p></div>
+        <div class="head-actions">
+          <label class="select-wrap"><select class="period" id="period" aria-label="Período da atividade"><option value="7">Últimos 7 dias</option><option value="30">Últimos 30 dias</option><option value="90">Últimos 90 dias</option></select></label>
+          <button class="btn primary" id="newTrans" type="button">＋ Nova transcrição</button>
+          <button class="icon-btn" id="notifications" type="button" aria-label="Notificações" title="Notificações"><svg viewBox="0 0 24 24"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><i class="bell-dot" id="notificationDot" hidden></i></button>
+          <button class="head-avatar" id="profileButton" type="button" aria-label="Ir para configurações da conta">V</button>
+        </div>
+      </header>
+
+      <section class="metrics" aria-label="Resumo das suas transcrições">
+        <article class="metric"><div class="metric-label">Total de transcrições <span class="metric-icon">▤</span></div><div class="metric-value" id="metricTotal">—</div><div class="metric-foot">Na sua biblioteca</div></article>
+        <article class="metric"><div class="metric-label">Concluídas <span class="metric-icon">✓</span></div><div class="metric-value" id="metricDone">—</div><div class="metric-foot">Prontas para revisar</div></article>
+        <article class="metric"><div class="metric-label">Em processamento <span class="metric-icon">◷</span></div><div class="metric-value" id="metricProcessing">—</div><div class="metric-foot">Arquivos na fila ou em envio</div></article>
+        <article class="metric"><div class="metric-label">Idiomas usados <span class="metric-icon">文</span></div><div class="metric-value" id="metricLanguages">—</div><div class="metric-foot">Idiomas nas suas gravações</div></article>
+      </section>
+
+      <section class="lower" aria-label="Atividade e transcrição recente">
+        <div>
+          <article class="panel chart-panel">
+            <div class="panel-head"><div><h2>Atividade de transcrição</h2><p id="chartCaption">Seus arquivos ao longo dos últimos 7 dias</p></div><span class="chart-key"><i></i> Arquivos enviados</span></div>
+            <div class="chart-wrap"><svg viewBox="0 0 660 245" preserveAspectRatio="none" role="img" aria-label="Gráfico da sua atividade de transcrição"><defs><linearGradient id="areaFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#b5f56b" stop-opacity=".22"/><stop offset="1" stop-color="#b5f56b" stop-opacity="0"/></linearGradient></defs><g id="grid"></g><path class="chart-area" id="chartArea"/><path class="chart-line" id="chartLine"/><g id="points"></g><g id="labels"></g></svg></div>
+          </article>
+          <article class="panel jobs-panel" id="transcricoes"><div class="panel-head"><div><h2>Transcrições recentes</h2><p>Arquivos vinculados à sua conta</p></div><span class="job-count" id="transcriptionCount">— arquivos</span></div><div id="jobList"><p class="empty">Carregando suas transcrições…</p></div></article>
+        </div>
+        <div>
+          <article class="panel recent" id="arquivos"><div class="panel-head"><div><h2>Atividade mais recente</h2><p id="recentSubtitle">Seu último arquivo aparecerá aqui</p></div><span class="recent-state" id="recentState"></span></div><div class="recent-wave" id="recentWave" aria-hidden="true"></div><div class="file-info"><div><strong id="recentName">Nenhuma transcrição ainda</strong><small id="recentMeta">Envie seu primeiro áudio ou vídeo.</small></div><span class="file-duration" id="recentSize"></span></div><div class="recent-footer"><span class="lang" id="recentLanguage"></span><a class="btn" id="viewTranscript" href="#transcricoes">Ver transcrição ↗</a></div></article>
+          <article class="panel upload-panel" id="uploadPanel"><div class="panel-head"><div><h2>Nova transcrição</h2><p>Áudio ou vídeo, inclusive arquivos grandes</p></div><span class="local-indicator"><i></i> Whisper local</span></div>
+            <form id="uploadForm"><div class="file-drop" id="fileDrop"><input id="uploadFile" type="file" accept="audio/*,video/*,.mp3,.wav,.m4a,.mp4,.aac,.ogg,.flac,.webm" hidden><svg class="upload-symbol" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 21V5m0 0-6 6m6-6 6 6M6 19v7h20v-7"/></svg><p class="drop-title" id="dropTitle">Arraste seu arquivo até aqui</p><p class="drop-subtitle">ou <button class="choose-file" id="chooseFile" type="button">escolha no computador</button></p><p class="file-formats" id="fileFormats">MP3, WAV, M4A, MP4, AAC, OGG, FLAC e WebM</p><div class="selected-file" id="selectedFile" hidden><span class="selected-file-mark" aria-hidden="true"></span><span><b id="selectedName"></b><small id="selectedMeta"></small></span><button type="button" class="clear-file" id="clearFile">Remover</button></div></div>
+              <div class="upload-options"><label for="uploadLanguage">Idioma<select id="uploadLanguage"><option value="pt-BR">Português (Brasil)</option><option value="en-US">English (US)</option><option value="es-ES">Español</option><option value="fr-FR">Français</option><option value="de-DE">Deutsch</option><option value="it-IT">Italiano</option><option value="ja-JP">日本語</option><option value="auto">Detectar automaticamente</option></select></label><button class="btn primary" id="submitUpload" type="submit" disabled>Transcrever <span aria-hidden="true">→</span></button></div>
+              <p class="upload-status" id="uploadStatus" role="status" aria-live="polite">O envio é dividido em partes para suportar arquivos grandes.</p><div class="upload-progress" id="uploadProgress" hidden><span id="uploadProgressBar"></span></div>
+            </form>
+          </article>
+          <article class="panel integration-panel" id="integracoes"><div class="panel-head"><div><h2>Serviço de transcrição</h2><p>Estado do servidor Vozia</p></div><span class="server-indicator" id="healthIndicator"><i></i> Verificando</span></div><p class="integration-copy" id="integrationCopy">Consultando a disponibilidade do Whisper.</p></article>
+        </div>
+      </section>
+
+      <section class="panel transcript-panel" id="transcriptPanel" hidden><div class="panel-head"><div><h2 id="transcriptTitle">Transcrição</h2><p class="muted" id="transcriptStatus">Aguardando processamento…</p></div><button class="btn" id="downloadSrt" type="button" hidden>Baixar .SRT</button></div><p class="error-copy" id="transcriptError" hidden></p><pre id="transcriptText"></pre></section>
+      <section class="panel account-panel" id="account"><div class="panel-head"><div><h2>Conta e configurações</h2><p>Informações do seu espaço Vozia</p></div></div><div class="account-data"><span class="avatar" id="accountAvatar">V</span><div><strong id="accountName">Carregando…</strong><small id="accountEmail"></small></div></div></section>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </main>
+  </div>
+  <script src="/vozia-config.js"></script>
+  <script src="/supabase-client.js"></script>
+  <script src="/app.js?v=2"></script>
 </body>
 </html>
