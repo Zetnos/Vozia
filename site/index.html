@@ -42,6 +42,17 @@ body{font-family:"DM Sans",Inter,system-ui,-apple-system,"Segoe UI",sans-serif}h
 <style>
 .workspace-entry{padding-top:34px;padding-bottom:54px}.workspace-entry-card{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:28px 32px;border:1px solid #2b332b;border-radius:14px;background:radial-gradient(ellipse at 10% 50%,#b5f56b0b,transparent 45%),linear-gradient(145deg,#111512,#0d100e)}.workspace-entry-card h2{margin:8px 0;font:600 clamp(22px,3vw,30px)/1.2 Manrope,sans-serif;letter-spacing:-.04em}.workspace-entry-card p{max-width:560px;margin:0;color:#99a198;font-size:13px}.workspace-entry-card .btn{flex:0 0 auto}.workspace-entry-link{text-decoration:none}@media(max-width:650px){.workspace-entry-card{align-items:flex-start;flex-direction:column;padding:23px 19px;gap:18px}.workspace-entry-card .btn{width:100%;justify-content:center}}
 </style>
+<style>
+.footer{display:block;padding:36px 0 20px;border-top:1px solid transparent;border-image:linear-gradient(90deg,#ffffff0b,#b5f56b30,#ffffff0b) 1}
+.footer-main{display:grid;grid-template-columns:minmax(220px,1.35fr) .72fr .72fr minmax(220px,1.1fr);gap:34px;padding:0 0 32px}
+.footer-brand .logo{font-size:21px}.footer-brand p{max-width:280px;margin:13px 0 17px;color:#909a90;font-size:12px;line-height:1.7}
+.footer-signals{display:flex;flex-wrap:wrap;gap:7px}.footer-signals span{padding:5px 8px;border:1px solid #293129;border-radius:20px;background:#101411;color:#a8b3a5;font-size:9px}.footer-signals i{display:inline-block;width:5px;height:5px;margin-right:5px;border-radius:50%;background:var(--lime);box-shadow:0 0 7px #b5f56b70}
+.footer-column{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding-top:5px}.footer-column strong{margin-bottom:4px;color:#e6ebe3;font-size:11px;font-weight:650}.footer-column a{color:#899389;font-size:11px;transition:color .18s,transform .18s}.footer-column a:hover{color:var(--lime);transform:translateX(2px)}
+.footer-cta{align-self:start;padding:16px;border:1px solid #2a3528;border-radius:12px;background:radial-gradient(ellipse at 100% 0,#b5f56b12,transparent 65%),linear-gradient(145deg,#121713,#0d100e)}.footer-cta small{color:var(--lime);font-size:9px;letter-spacing:.13em;text-transform:uppercase}.footer-cta strong{display:block;margin:8px 0 14px;font:600 16px/1.35 Manrope,sans-serif;letter-spacing:-.025em}.footer-cta .btn{display:inline-flex;align-items:center;gap:8px;padding:8px 11px;font-size:10px}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-top:15px;border-top:1px solid #ffffff0d;color:#707a70;font-size:10px}.footer-bottom a{color:#9aa497;transition:color .18s}.footer-bottom a:hover{color:var(--lime)}
+@media(max-width:900px){.footer-main{grid-template-columns:1.2fr .7fr .7fr;gap:25px}.footer-cta{grid-column:1/-1;max-width:none;display:flex;align-items:center;justify-content:space-between;gap:18px}.footer-cta strong{margin:0 auto 0 0}.footer-cta small{flex:0 0 auto}}
+@media(max-width:600px){.footer{padding-top:28px}.footer-main{grid-template-columns:1fr 1fr;gap:23px 16px;padding-bottom:24px}.footer-brand{grid-column:1/-1}.footer-brand p{max-width:340px}.footer-cta{grid-column:1/-1;align-items:flex-start;flex-direction:column;gap:8px}.footer-cta strong{margin:0}.footer-bottom{align-items:flex-start;flex-direction:column;gap:8px}.footer-bottom a{align-self:flex-end;margin-top:-22px}}
+</style>
 </head>
 <body>
 <header class="topbar wrap">
@@ -88,9 +99,13 @@ body{font-family:"DM Sans",Inter,system-ui,-apple-system,"Segoe UI",sans-serif}h
 
   </main>
 <footer class="footer wrap" id="footer">
-  <a class="logo" href="./" aria-label="Vozia, início"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>Vozia</a>
-  <nav class="footer-links" aria-label="Links institucionais"><a data-workspace-entry href="/login?next=%2Fapp">Meu espaço</a><a href="#precos">Recursos</a><a href="#como-funciona">Ajuda</a><a href="/login">Perfil</a><a data-workspace-entry href="/login?next=%2Fapp">Dashboard</a></nav>
-  <span class="copyright">© 2026 Vozia · Transcrição local de áudio e vídeo</span>
+  <div class="footer-main">
+    <div class="footer-brand"><a class="logo" href="/" aria-label="Vozia, início"><span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>Vozia</a><p>Transforme gravações em texto organizado, sincronizado e pronto para continuar seu trabalho.</p><div class="footer-signals"><span><i></i>Whisper local</span><span>Áudio e vídeo</span><span>Legendas SRT</span></div></div>
+    <nav class="footer-column" aria-label="Produto"><strong>Produto</strong><a href="#como-funciona">Como funciona</a><a href="#precos">Recursos</a><a data-workspace-entry href="/login?next=%2Fapp">Dashboard</a></nav>
+    <nav class="footer-column" aria-label="Sua conta"><strong>Sua conta</strong><a href="/register">Criar conta</a><a href="/login">Entrar</a><a data-workspace-entry href="/login?next=%2Fapp">Meu espaço</a></nav>
+    <div class="footer-cta"><small>Da gravação à clareza</small><strong>Pronto para começar sua próxima transcrição?</strong><a class="btn primary workspace-entry-link" data-workspace-entry href="/register">Começar grátis <span aria-hidden="true">→</span></a></div>
+  </div>
+  <div class="footer-bottom"><span class="copyright">© 2026 Vozia · Transcrição de áudio e vídeo</span><span>Feito para encontrar cada fala.</span><a href="#inicio">Voltar ao topo ↑</a></div>
 </footer>
 <script>
 const dots=document.querySelector('#dots');
