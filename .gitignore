@@ -1,0 +1,8 @@
+*
+!.gitignore
+!README.md
+!site/
+!site/**
+!.github/
+!.github/workflows/
+!.github/workflows/pages.yml
