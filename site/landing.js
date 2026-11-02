@@ -35,14 +35,14 @@
     }
   });
 
-  if (location.hostname.endsWith('github.io')) announce('Demonstração pública. Transcrições reais precisam do servidor Vozia com Whisper conectado.');
-
   const formatSize = bytes => bytes >= 1024 ** 3 ? (bytes / 1024 ** 3).toFixed(2) + ' GB' : (bytes / 1024 ** 2).toFixed(1) + ' MB';
   const validFile = file => /\.(mp3|wav|m4a|mp4|aac|ogg|flac|webm)$/i.test(file.name) || file.type.startsWith('audio/') || file.type.startsWith('video/');
   const announce = (message, state = '') => {
     status.textContent = message;
     status.dataset.state = state;
   };
+  if (location.hostname.endsWith('github.io')) announce('Demonstração pública. Transcrições reais precisam do servidor Vozia com Whisper conectado.');
+
   const setFile = file => {
     if (!file) return;
     if (!validFile(file)) {
@@ -81,8 +81,9 @@
 
   form.addEventListener('submit', async event => {
     event.preventDefault();
-    if (!selectedFile || busy) return;    if (location.hostname.endsWith(''github.io'')) {
-      announce(''A página pública está no ar. Para transcrever, é necessário conectar um servidor Vozia com Whisper; veja as instruções no repositório.'', ''error'');
+    if (!selectedFile || busy) return;
+    if (location.hostname.endsWith('github.io')) {
+      announce('A página pública está no ar. Para transcrever, é necessário conectar um servidor Vozia com Whisper; veja as instruções no repositório.', 'error');
       return;
     }
     busy = true;
