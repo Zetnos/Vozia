@@ -177,6 +177,7 @@
     };
 
     const demoContent = {
+      dashboard: '<div class="demo-dashboard"><aside class="demo-sidebar"><span class="demo-sidebar-label">ESPAÇO DE TRABALHO</span><button class="demo-side-link active" type="button" data-demo-nav="dashboard"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="5" rx="1"/><rect x="13" y="10" width="8" height="11" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/></svg>Visão geral</button><button class="demo-side-link" type="button" data-demo-nav="sync"><svg viewBox="0 0 24 24"><path d="M4 5h16v12H8l-4 3V5Z"/><path d="M8 9h8M8 13h6"/></svg>Transcrições</button><button class="demo-side-link" type="button" data-demo-nav="export"><svg viewBox="0 0 24 24"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"/></svg>Arquivos e SRT</button></aside><div class="demo-dashboard-main"><div class="demo-dashboard-title"><div><small>SEU PAINEL</small><h3>Olá, este é seu espaço.</h3></div><a class="demo-new-upload" href="#transcricao">+ Nova transcrição</a></div><div class="demo-metrics"><div class="demo-metric"><span>Transcrições</span><b>12</b><small>↑ 3 nesta semana</small></div><div class="demo-metric"><span>Minutos processados</span><b>248</b><small>Áudio e vídeo</small></div><div class="demo-metric"><span>Arquivos recentes</span><b>4</b><small>Prontos para revisar</small></div></div><div class="demo-home-grid"><section class="demo-home-card"><div class="demo-home-card-head">Atividade recente <span>Ver todas →</span></div><div class="demo-recent-file"><span class="demo-mini-file-icon"><svg viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3Z"/><path d="M14 3v6h6"/></svg></span><span class="demo-recent-copy"><b>entrevista-equipe.mp4</b><small>Hoje · 10:42 · 142 MB</small></span><span class="demo-job-state"><i></i> Em envio</span></div><button type="button" class="demo-inline-action" data-demo-nav="sync" style="margin-top:12px">Abrir transcrição →</button></section><section class="demo-home-card demo-dash-upload"><div class="demo-home-card-head">Upload em andamento <span>Whisper local</span></div><div class="demo-status"><span id="uploadState">Preparando envio…</span><b id="uploadCount">0 de 8 partes</b></div><div class="chunk-track" aria-label="Prévia ilustrativa do envio em partes">' + Array.from({length: 8}, (_, i) => '<span class="chunk-block" data-chunk="' + (i + 1) + '">0' + (i + 1) + '</span>').join('') + '</div><div class="demo-progress"><span id="demoProgress"></span></div><div class="demo-foot"><span>Arquivo dividido em partes</span><button type="button" class="demo-inline-action" id="restartUpload">Repetir</button></div></section></div></div></div>',
       upload: '<div class="demo-upload"><div class="demo-file"><span class="demo-file-icon"><svg viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3Z"/><path d="M14 3v6h6M8 14h.1M11 14h.1M14 14h.1M17 14h.1"/></svg></span><span class="demo-file-name"><b>entrevista-equipe.mp4</b><small>Arquivo de exemplo · 142 MB · MP4</small></span><span class="demo-file-size">142 MB</span></div><div class="demo-status"><span id="uploadState">Preparando envio em partes…</span><b id="uploadCount">0 de 8 partes</b></div><div class="chunk-track" aria-label="Progresso ilustrativo de envio">' + Array.from({length: 8}, (_, i) => '<span class="chunk-block" data-chunk="' + (i + 1) + '">0' + (i + 1) + '</span>').join('') + '</div><div class="demo-progress"><span id="demoProgress"></span></div><div class="demo-foot"><span>Envio dividido para arquivos grandes</span><button type="button" class="demo-inline-action" id="restartUpload">Repetir animação</button></div></div>',
       sync: '<div class="demo-sync"><div class="demo-media"><div class="demo-media-title"><b>entrevista-equipe.mp4</b><span id="syncTime">00:04 / 10:43</span></div><div class="demo-wave" id="demoWave" aria-hidden="true"></div><div class="demo-player-controls"><button class="demo-play" id="togglePlay" type="button" aria-label="Pausar prévia"><svg id="toggleIcon" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></svg></button><span class="demo-track"><span id="demoTrack"></span></span><span class="demo-duration">10:43</span></div></div><div class="demo-transcript" aria-label="Trechos de transcrição sincronizados"><div class="demo-transcript-row active"><time>00:04–00:08</time><span>Quando a gente escuta com atenção, as ideias começam a ganhar forma.</span></div><div class="demo-transcript-row"><time>00:08–00:12</time><span>' + transcriptExample + '</span></div><div class="demo-transcript-row"><time>00:12–00:17</time><span>Assim fica mais simples encontrar cada momento da gravação.</span></div></div></div>',
       export: '<div class="demo-export"><pre class="srt-preview" id="srtPreview"></pre><div class="export-controls"><button type="button" id="downloadSrt">Baixar .SRT</button><button type="button" id="copyTranscript">Copiar texto</button><p class="export-notice" id="exportNotice" role="status" aria-live="polite"></p></div></div>'
@@ -188,6 +189,7 @@
       const progress = demoPanel.querySelector('#demoProgress');
       const state = demoPanel.querySelector('#uploadState');
       const count = demoPanel.querySelector('#uploadCount');
+      const jobState = demoPanel.querySelector('#dashboardJobLabel');
       if (!blocks.length) return;
       let complete = 0;
       blocks.forEach(block => block.classList.remove('done', 'current'));
@@ -197,8 +199,10 @@
         progress.style.width = '100%';
         state.textContent = 'Arquivo pronto para transcrição';
         count.textContent = '8 de 8 partes';
+        if (jobState) jobState.textContent = 'Na fila';
         return;
       }
+      if (jobState) jobState.textContent = 'Enviando';
       state.textContent = 'Preparando envio em partes…';
       count.textContent = '0 de 8 partes';
       demoUploadTimer = setInterval(() => {
@@ -210,6 +214,7 @@
         state.textContent = complete >= 8 ? 'Arquivo pronto para transcrição' : 'Enviando partes do arquivo…';
         if (complete >= 8) {
           blocks[7].classList.replace('current', 'done');
+          if (jobState) jobState.textContent = 'Na fila';
           clearInterval(demoUploadTimer);
         }
       }, 470);
@@ -217,7 +222,8 @@
 
     function renderDemo(step) {
       clearDemoTimers();
-      demoPanel.innerHTML = demoContent[step];
+      const sidebar = '<aside class="demo-sidebar"><span class="demo-sidebar-label">ESPAÇO DE TRABALHO</span><button class="demo-side-link ' + (step === 'dashboard' ? 'active' : '') + '" type="button" data-demo-nav="dashboard"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="5" rx="1"/><rect x="13" y="10" width="8" height="11" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/></svg>Visão geral</button><button class="demo-side-link ' + (step === 'sync' ? 'active' : '') + '" type="button" data-demo-nav="sync"><svg viewBox="0 0 24 24"><path d="M4 5h16v12H8l-4 3V5Z"/><path d="M8 9h8M8 13h6"/></svg>Transcrições</button><button class="demo-side-link ' + (step === 'export' ? 'active' : '') + '" type="button" data-demo-nav="export"><svg viewBox="0 0 24 24"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"/></svg>Arquivos e SRT</button></aside>';
+      demoPanel.innerHTML = step === 'dashboard' ? demoContent[step] : '<div class="demo-dashboard">' + sidebar + '<div class="demo-dashboard-main">' + demoContent[step] + '</div></div>';
       demoPanel.setAttribute('aria-labelledby', 'tab-' + step);
       demoTabs.forEach(tab => {
         const active = tab.dataset.demoStep === step;
@@ -225,7 +231,16 @@
         tab.setAttribute('aria-selected', String(active));
         tab.tabIndex = active ? 0 : -1;
       });
-      if (step === 'upload') {
+      demoPanel.querySelectorAll('[data-demo-nav]').forEach(button => button.addEventListener('click', () => renderDemo(button.dataset.demoNav)));
+      if (step === 'dashboard') {
+        const badge = demoPanel.querySelector('.demo-job-state');
+        if (badge) {
+          const dot = badge.querySelector('i');
+          const label = document.createElement('span');
+          label.id = 'dashboardJobLabel';
+          label.textContent = 'Enviando';
+          badge.replaceChildren(dot, label);
+        }
         animateDemoUpload();
         demoPanel.querySelector('#restartUpload').addEventListener('click', animateDemoUpload);
       }
@@ -288,7 +303,7 @@
         renderDemo(demoTabs[next].dataset.demoStep);
       });
     });
-    renderDemo('upload');
+    renderDemo('dashboard');
     window.addEventListener('pagehide', clearDemoTimers);
   }
 })();
