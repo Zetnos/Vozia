@@ -21,3 +21,18 @@ A landing da pasta `site/` é publicada no Vercel. O servidor Node/Python do Voz
 3. Configure o endereço público do serviço como a aplicação principal do Vozia. A landing da Vercel permanece uma publicação separada até receber esse endereço para encaminhar login e transcrição ao servidor.
 
 O worker usa Whisper local em CPU e baixa o modelo escolhido na primeira transcrição. Os arquivos e a fila dependem de armazenamento persistente; a landing estática, por si só, não executa `/api/*` nem Whisper.
+
+## Login, cadastro e administração no site
+
+As páginas estáticas de login, cadastro e `/app` usam Supabase Auth. A configuração pública fica em `site/vozia-config.js`; ela contém apenas a URL do projeto e a chave publishable, protegidas pelas políticas RLS do banco. As rotas amigáveis estão em `site/vercel.json`.
+
+Execute também `supabase/migrations/202611020002_admin_roles.sql` no Supabase. Novas contas recebem o papel `user`. Para autorizar a primeira conta administradora, depois do cadastro execute no SQL Editor:
+
+```sql
+update public.profiles p
+set role = 'admin'
+from auth.users u
+where u.id = p.id and lower(u.email) = lower('EMAIL_DO_ADMIN');
+```
+
+No Supabase Authentication → URL Configuration, defina `https://vozia-zetnos-projects.vercel.app` como Site URL e permita `https://vozia-zetnos-projects.vercel.app/**` e `http://localhost:3000/**` como Redirect URLs. O painel `/admin` confere `profiles.role` e as policies RLS liberam dados administrativos apenas para contas com papel `admin`.

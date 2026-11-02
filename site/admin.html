@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#090c0a">
+  <title>Administração — Vozia</title><link rel="icon" href="/vozia-icon.svg" type="image/svg+xml"><link rel="stylesheet" href="/auth.css">
+  <style>
+    body{min-height:100vh}.admin{width:min(1160px,calc(100% - 40px));margin:38px auto}.head{display:flex;align-items:center;justify-content:space-between;gap:18px}.head .auth-brand{margin:0}.head nav{display:flex;align-items:center;gap:10px}.head nav a,.head nav button{padding:10px 14px;border:1px solid #2e382c;border-radius:9px;background:#111713;color:#ebf0e8;text-decoration:none;font:inherit;cursor:pointer}.intro{margin:42px 0 25px}.intro h1{margin:5px 0;font-size:clamp(30px,5vw,44px)}.subtle{color:#9ca69c}.notice{margin:15px 0;padding:13px 15px;border:1px solid #75533d;background:#211811;color:#f2c9a9;border-radius:9px}.login-box{max-width:480px;margin:70px auto 0;padding:32px;border:1px solid #293129;background:#101411;border-radius:16px}.login-box h1{margin:5px 0 8px}.login-box form{display:grid;gap:12px;margin-top:22px}.login-box input{padding:13px;border:1px solid #354135;border-radius:8px;background:#0b0f0c;color:#edf2eb;font:inherit}.login-box button{padding:13px;border:0;border-radius:8px;background:#cbee3f;color:#141910;font:inherit;font-weight:700;cursor:pointer}.login-box .auth-brand{margin-bottom:25px}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.metric,.panel{padding:20px;border:1px solid #273027;border-radius:13px;background:#101411}.metric span{display:block;color:#9ca69c;font-size:13px}.metric strong{display:block;margin-top:12px;font-size:32px;color:#eef2ea}.panel{margin-top:16px}.panel h2{margin:0 0 5px}.table-wrap{overflow:auto}.rows{width:100%;border-collapse:collapse;margin-top:14px}.rows th,.rows td{padding:13px 10px;text-align:left;border-bottom:1px solid #263026;white-space:nowrap}.rows th{font-size:12px;color:#9ca69c}.pill{color:#cbee3f}.empty{padding:24px;text-align:center;color:#a3aca2}.session-email{font-size:13px;color:#a3aca2}@media(max-width:650px){.metrics{grid-template-columns:1fr}.head{align-items:flex-start;flex-direction:column}.admin{width:min(calc(100% - 24px),1160px)}.panel,.metric{padding:15px}.rows th,.rows td{padding:10px 7px;font-size:12px}}
+  </style>
+</head>
+<body>
+  <main class="admin">
+    <section class="login-box" id="loginView" hidden>
+      <a class="auth-brand" href="/" aria-label="Vozia, início"><span class="brand-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>Vozia</a>
+      <span class="auth-kicker">ÁREA RESTRITA</span><h1>Administração</h1><p class="subtle">Entre com uma conta Vozia autorizada como administradora.</p>
+      <form id="adminLogin"><label>E-mail<input type="email" name="email" autocomplete="username" required></label><label>Senha<input type="password" name="password" autocomplete="current-password" required></label><button type="submit">Entrar no painel <span aria-hidden="true">→</span></button></form>
+      <div class="notice" id="loginMessage" role="status" hidden></div><p><a href="/login">Entrar como usuário</a></p>
+    </section>
+    <section id="adminView" hidden>
+      <header class="head"><a class="auth-brand" href="/" aria-label="Vozia, início"><span class="brand-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>Vozia</a><nav><span class="session-email" id="adminEmail"></span><a href="/app">Meu espaço</a><button id="signOut">Sair</button></nav></header>
+      <section class="intro"><span class="auth-kicker">CONTROLE DA PLATAFORMA</span><h1>Painel administrativo</h1><p class="subtle">Visão geral de contas e transcrições.</p></section>
+      <div class="notice" id="adminMessage" role="status" hidden></div>
+      <section class="metrics"><article class="metric"><span>Contas cadastradas</span><strong id="userCount">—</strong></article><article class="metric"><span>Transcrições</span><strong id="jobCount">—</strong></article><article class="metric"><span>Concluídas</span><strong id="doneCount">—</strong></article></section>
+      <section class="panel"><h2>Contas recentes</h2><p class="subtle">Contas e permissões do sistema.</p><div class="table-wrap" id="usersTable"></div></section>
+      <section class="panel"><h2>Transcrições recentes</h2><p class="subtle">Atividade registrada no banco da Vozia.</p><div class="table-wrap" id="jobsTable"></div></section>
+    </section>
+  </main>
+  <script src="/vozia-config.js"></script><script src="/supabase-client.js"></script><script src="/admin.js"></script>
+</body>
+</html>

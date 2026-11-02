@@ -1,0 +1,11 @@
+{
+  "rewrites": [
+    { "source": "/login", "destination": "/auth.html?page=login" },
+    { "source": "/register", "destination": "/auth.html?page=register" },
+    { "source": "/forgot-password", "destination": "/auth.html?page=forgot-password" },
+    { "source": "/reset-password", "destination": "/auth.html?page=reset-password" },
+    { "source": "/app", "destination": "/app.html" },
+    { "source": "/dashboard", "destination": "/app.html" },
+    { "source": "/admin", "destination": "/admin.html" }
+  ]
+}

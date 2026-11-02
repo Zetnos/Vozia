@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#090c0a">
+  <title>Entrar na Vozia</title><link rel="icon" href="/vozia-icon.svg" type="image/svg+xml"><link rel="stylesheet" href="/auth.css">
+</head>
+<body data-page="__AUTH_PAGE__">
+  <main class="auth-layout">
+    <a class="auth-brand" href="/" aria-label="Vozia, início"><span class="brand-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>Vozia</a>
+    <section class="auth-card" aria-labelledby="authTitle">
+      <span class="auth-kicker">SEU ESPAÇO, EM TODOS OS DISPOSITIVOS</span>
+      <h1 id="authTitle">Entre na sua conta</h1>
+      <p class="auth-description" id="authDescription">Acesse suas transcrições e continue de onde parou.</p>
+      <div class="auth-notice" id="authNotice" role="status" aria-live="polite" hidden></div>
+      <form id="authForm" novalidate>
+        <label id="nameField" hidden>Nome de exibição<input name="name" autocomplete="name" maxlength="80" placeholder="Seu nome"></label>
+        <label id="emailField">E-mail<input name="email" type="email" autocomplete="email" required placeholder="voce@exemplo.com"></label>
+        <label id="passwordField">Senha<input name="password" type="password" autocomplete="current-password" minlength="8" required placeholder="Mínimo de 8 caracteres"></label>
+        <label id="confirmField" hidden>Confirmar nova senha<input name="confirmPassword" type="password" autocomplete="new-password" minlength="8" placeholder="Repita sua nova senha"></label>
+        <button class="auth-submit" id="authSubmit" type="submit">Entrar <span aria-hidden="true">→</span></button>
+      </form>
+      <nav class="auth-links" aria-label="Opções da conta">
+        <a id="secondaryLink" href="/register">Criar uma conta</a>
+        <a id="forgotLink" href="/forgot-password">Esqueci minha senha</a>
+        <a id="backLink" href="/login" hidden>Voltar para entrar</a>
+      </nav>
+      <p class="auth-footnote">Sua conta e seus arquivos são protegidos por políticas de acesso individuais.</p>
+    </section>
+    <footer>Vozia · Áudio entra. Inteligência sai.</footer>
+  </main>
+  <script src="/vozia-config.js"></script>
+  <script src="/supabase-client.js"></script>
+  <script src="/auth.js"></script>
+</body>
+</html>

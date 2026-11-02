@@ -9,6 +9,7 @@
 !supabase/
 !supabase/migrations/
 !supabase/migrations/202611020001_vozia_accounts.sql
+!supabase/migrations/202611020002_admin_roles.sql
 .vercel
 .env*
 !server.js
