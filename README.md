@@ -18,9 +18,9 @@ A landing da pasta `site/` é publicada no Vercel. O servidor Node/Python do Voz
 
 1. Crie um serviço Docker usando este repositório e o `Dockerfile` da raiz. Configure o serviço para ouvir a porta `3000` e monte um volume persistente em `/app/uploads`.
 2. Defina no serviço `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SECRET_KEY`, `PUBLIC_URL` e uma senha forte em `ADMIN_PASSWORD`. Não coloque segredos no GitHub nem no Vercel como variáveis públicas.
-3. Configure o endereço público do serviço como a aplicação principal do Vozia. A landing da Vercel permanece uma publicação separada até receber esse endereço para encaminhar login e transcrição ao servidor.
+3. No projeto da Vercel, adicione a variável de ambiente `VOZIA_API_URL` com o endereço público HTTPS do worker, sem `/api` no final, e faça um novo deploy. A função `site/api/[...path].js` encaminha as chamadas do site ao worker e cada parte de arquivo tem 4 MB para respeitar o limite de requisição das funções Vercel.
 
-O worker usa Whisper local em CPU e baixa o modelo escolhido na primeira transcrição. Os arquivos e a fila dependem de armazenamento persistente; a landing estática, por si só, não executa `/api/*` nem Whisper.
+O worker usa Whisper local em CPU e baixa o modelo escolhido na primeira transcrição. Os arquivos e a fila dependem de armazenamento persistente; a landing estática, por si só, não executa Whisper. O site e a integração HTTP podem ser implantados sem `VOZIA_API_URL`, mas a API responderá `503` até o worker público ser implantado e configurado.
 
 ## Login, cadastro e administração no site
 

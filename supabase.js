@@ -80,7 +80,11 @@ function readCookie(req, name) {
 
 async function authenticate(req, res) {
   if (!configured()) return null;
-  const accessToken = readCookie(req, 'vozia_access');
+  // The Vercel-hosted static client keeps the Supabase session in the browser
+  // and sends its access token to the same-origin transcription API.
+  const authorization = String(req.headers.authorization || '');
+  const bearerToken = /^Bearer\s+(.+)$/i.exec(authorization)?.[1] || '';
+  const accessToken = bearerToken || readCookie(req, 'vozia_access');
   const refreshToken = readCookie(req, 'vozia_refresh');
   if (accessToken) {
     try {

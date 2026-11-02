@@ -65,7 +65,7 @@
     document.querySelector('#selectedFile').hidden = true;
     document.querySelector('#fileFormats').hidden = false;
     submit.disabled = true;
-    announce('Arquivos grandes são enviados em partes de 8 MB.');
+    announce('Arquivos grandes são enviados em partes de até 4 MB.');
   };
 
   chooseButton.addEventListener('click', () => input.click());
@@ -82,21 +82,24 @@
   form.addEventListener('submit', async event => {
     event.preventDefault();
     if (!selectedFile || busy) return;
-    if (location.hostname.endsWith('github.io')) {
-      announce('A página pública está no ar. Para transcrever, é necessário conectar um servidor Vozia com Whisper; veja as instruções no repositório.', 'error');
-      return;
-    }
     busy = true;
     submit.disabled = true;
     submit.innerHTML = 'Preparando envio <span aria-hidden="true">…</span>';
     progress.hidden = false;
     announce('Conectando ao servidor de transcrição da Vozia…');
     try {
+      const session = await window.VoziaAuth?.validSession();
+      if (!session?.access_token) {
+        location.assign('/login?next=%2F%23transcricao');
+        return;
+      }
+      const apiHeaders = extra => ({ ...extra, Authorization: `Bearer ${session.access_token}` });
       const healthResponse = await fetch('/api/health');
       let health;
       try { health = await healthResponse.json(); }
-      catch { throw new Error('A página está publicada, mas a API de transcrição ainda não foi conectada. O serviço Whisper precisa estar implantado para receber arquivos.'); }
-      if (healthResponse.status === 404) throw new Error('A API de transcrição ainda não foi conectada a este domínio. O servidor Vozia com Whisper precisa estar implantado.');
+      catch { throw new Error('Não foi possível ler o estado do servidor de transcrição. Confira a implantação da API Vozia.'); }
+      if (healthResponse.status === 503 || healthResponse.status === 502) throw new Error(health.error || 'O servidor Vozia com Whisper ainda não está conectado.');
+      if (healthResponse.status === 404) throw new Error('A rota da API não foi encontrada. Confira o deploy da integração Vozia.');
       if (!healthResponse.ok || health.server === 'offline') throw new Error('O servidor da Vozia está offline. Inicie o servidor e tente novamente.');
       if (health.whisperInstalled === false) throw new Error('O Whisper não está instalado neste servidor. Confira a instalação local e tente novamente.');
       let workspaceId = '';
@@ -106,7 +109,7 @@
       } catch {}
       const startResponse = await fetch('/api/uploads', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: apiHeaders({ 'Content-Type': 'application/json' }),
         body: JSON.stringify({
           name: selectedFile.name,
           size: selectedFile.size,
@@ -123,7 +126,7 @@
         const part = selectedFile.slice(index * startData.chunkSize, Math.min(selectedFile.size, (index + 1) * startData.chunkSize));
         const response = await fetch('/api/uploads/' + startData.id + '/chunks/' + index, {
           method: 'PUT',
-          headers: { 'Content-Type': 'application/octet-stream' },
+          headers: apiHeaders({ 'Content-Type': 'application/octet-stream' }),
           body: part
         });
         if (!response.ok) throw new Error('Falha ao enviar a parte ' + (index + 1) + ' de ' + total + '. Tente novamente.');
@@ -131,7 +134,7 @@
         progressBar.style.transform = 'scaleX(' + percent / 100 + ')';
         announce('Enviando parte ' + (index + 1) + ' de ' + total + ' · ' + percent + '%');
       }
-      const complete = await fetch('/api/uploads/' + startData.id + '/complete', { method: 'POST' });
+      const complete = await fetch('/api/uploads/' + startData.id + '/complete', { method: 'POST', headers: apiHeaders({}) });
       const result = await complete.json();
       if (!complete.ok) throw new Error(result.error || 'Não foi possível finalizar o envio.');
       announce('Arquivo recebido. Abrindo sua transcrição…', 'success');

@@ -12,6 +12,7 @@
     <header class="top"><a class="auth-brand" href="/" aria-label="Vozia, início"><span class="brand-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>Vozia</a><nav class="actions"><a class="primary" href="/#transcricao">Nova transcrição <span aria-hidden="true">→</span></a><a id="adminLink" href="/admin" hidden>Administração</a><button id="signOut">Sair</button></nav></header>
     <section class="welcome"><span class="auth-kicker">SEU ESPAÇO VOZIA</span><h1>Olá, <span id="displayName">…</span></h1><p class="muted user-email" id="userEmail"></p></section>
     <section class="panel"><div class="panel-head"><div><h2>Suas transcrições</h2><p class="muted">Arquivos associados à sua conta.</p></div><span class="status" id="transcriptionCount">—</span></div><div id="jobList"><p class="empty">Carregando seu espaço…</p></div></section>
+    <section class="panel" id="transcriptPanel" hidden><div class="panel-head"><div><h2 id="transcriptTitle">Transcrição</h2><p class="muted" id="transcriptStatus">Aguardando processamento…</p></div><button class="job-link" id="downloadSrt" type="button" hidden>Baixar SRT</button></div><p class="muted" id="transcriptError" hidden></p><pre id="transcriptText" style="white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;line-height:1.8;color:#e8eee7;margin:18px 0 0"></pre></section>
     <div class="auth-notice" id="appNotice" role="status" aria-live="polite" hidden></div>
   </main>
   <script src="/vozia-config.js"></script><script src="/supabase-client.js"></script><script src="/app.js"></script>

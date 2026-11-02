@@ -100,6 +100,8 @@ body{font-family:"DM Sans",Inter,system-ui,-apple-system,"Segoe UI",sans-serif}h
 const dots=document.querySelector('#dots');
 for(let x=0;x<=640;x+=12){const y=125+Math.sin(x*.016)*35+Math.sin(x*.043)*17;for(let row=-3;row<=3;row++){const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');dot.setAttribute('cx',x);dot.setAttribute('cy',y+row*12);dot.setAttribute('r',Math.max(1,2.1-Math.abs(row)*.16));dot.setAttribute('class','wave-dot');dot.style.opacity=String(Math.max(.14,.88-Math.abs(row)*.11));dots.appendChild(dot)}}
 </script>
-<script src="landing.js?v=4"></script>
+<script src="vozia-config.js"></script>
+<script src="supabase-client.js"></script>
+<script src="landing.js?v=5"></script>
 </body></html>
 
