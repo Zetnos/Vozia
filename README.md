@@ -12,4 +12,12 @@ O esquema de perfis e transcrições está versionado em `supabase/migrations/20
 
 O projeto Vercel `vozia` está conectado ao repositório `Zetnos/Vozia` e usa `site/` como diretório raiz, sem comando de build. Commits na branch `main` acionam deploy automático. O GitHub Pages continua usando a mesma pasta estática.
 
-A interface chama endpoints `/api` para upload e transcrição. O código desses endpoints e o worker Whisper ainda precisam ser implantados em um serviço de backend; a migração SQL do Supabase, sozinha, não fornece esses endpoints.
+A landing da pasta `site/` é publicada no Vercel. O servidor Node/Python do Vozia está versionado na raiz e empacotado no `Dockerfile`; ele precisa rodar em um serviço de containers com volume persistente montado em `/app/uploads`, pois guarda os uploads e a fila localmente. O Vercel continua responsável pela landing estática e não executa esse processo persistente.
+
+### Publicar o servidor Whisper
+
+1. Crie um serviço Docker usando este repositório e o `Dockerfile` da raiz. Configure o serviço para ouvir a porta `3000` e monte um volume persistente em `/app/uploads`.
+2. Defina no serviço `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SECRET_KEY`, `PUBLIC_URL` e uma senha forte em `ADMIN_PASSWORD`. Não coloque segredos no GitHub nem no Vercel como variáveis públicas.
+3. Configure o endereço público do serviço como a aplicação principal do Vozia. A landing da Vercel permanece uma publicação separada até receber esse endereço para encaminhar login e transcrição ao servidor.
+
+O worker usa Whisper local em CPU e baixa o modelo escolhido na primeira transcrição. Os arquivos e a fila dependem de armazenamento persistente; a landing estática, por si só, não executa `/api/*` nem Whisper.

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Vozia — ícone de áudio</title>
+  <rect x="3" y="3" width="58" height="58" rx="16" fill="#101212" stroke="#343a35" stroke-width="2"/>
+  <g fill="#cbee3f">
+    <rect x="14" y="25" width="5" height="14" rx="2.5"/>
+    <rect x="23" y="17" width="5" height="30" rx="2.5"/>
+    <rect x="32" y="10" width="5" height="44" rx="2.5"/>
+    <rect x="41" y="20" width="5" height="24" rx="2.5"/>
+    <rect x="50" y="27" width="4" height="10" rx="2"/>
+  </g>
+</svg>

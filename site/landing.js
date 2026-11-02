@@ -56,7 +56,7 @@
     document.querySelector('#selectedFile').hidden = false;
     document.querySelector('#fileFormats').hidden = true;
     submit.disabled = false;
-    announce(file.size > 100 * 1024 * 1024 ? 'Arquivo grande selecionado · será enviado em partes de 8 MB.' : 'Arquivo pronto para transcrever.');
+    announce(file.size > 100 * 1024 * 1024 ? 'Arquivo grande selecionado · envio dividido em partes.' : 'Arquivo selecionado · pronto para envio.');
   };
   const clearFile = () => {
     selectedFile = null;
@@ -90,10 +90,13 @@
     submit.disabled = true;
     submit.innerHTML = 'Preparando envio <span aria-hidden="true">…</span>';
     progress.hidden = false;
-    announce('Conectando ao servidor local da Vozia…');
+    announce('Conectando ao servidor de transcrição da Vozia…');
     try {
       const healthResponse = await fetch('/api/health');
-      const health = await healthResponse.json();
+      let health;
+      try { health = await healthResponse.json(); }
+      catch { throw new Error('A página está publicada, mas a API de transcrição ainda não foi conectada. O serviço Whisper precisa estar implantado para receber arquivos.'); }
+      if (healthResponse.status === 404) throw new Error('A API de transcrição ainda não foi conectada a este domínio. O servidor Vozia com Whisper precisa estar implantado.');
       if (!healthResponse.ok || health.server === 'offline') throw new Error('O servidor da Vozia está offline. Inicie o servidor e tente novamente.');
       if (health.whisperInstalled === false) throw new Error('O Whisper não está instalado neste servidor. Confira a instalação local e tente novamente.');
       let workspaceId = '';

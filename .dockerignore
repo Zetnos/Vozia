@@ -1,0 +1,12 @@
+.git
+.vercel
+.env
+.env.*
+!.env.example
+.venv
+node_modules
+__pycache__
+uploads
+*.log
+site
+.github

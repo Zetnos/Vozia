@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#101c1b" />
+  <title>Administração — Vozia</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='3' y='3' width='58' height='58' rx='16' fill='%23101212' stroke='%23343a35' stroke-width='2'/%3E%3Cg fill='%23cbee3f'%3E%3Crect x='14' y='25' width='5' height='14' rx='2.5'/%3E%3Crect x='23' y='17' width='5' height='30' rx='2.5'/%3E%3Crect x='32' y='10' width='5' height='44' rx='2.5'/%3E%3Crect x='41' y='20' width='5' height='24' rx='2.5'/%3E%3Crect x='50' y='27' width='4' height='10' rx='2'/%3E%3C/g%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <section class="login" id="loginView" hidden>
+    <a class="brand" href="/"><span class="mark">〰</span> vozia<span>.</span></a>
+    <div class="login-card"><div class="overline">ÁREA RESTRITA</div><h1>Painel administrativo</h1><p>Entre com a senha de administrador configurada no servidor.</p>
+      <form id="loginForm"><label for="password">Senha administrativa</label><input id="password" type="password" autocomplete="current-password" required autofocus><button class="primary">Entrar no painel <span>→</span></button></form>
+      <div class="message" id="loginMessage" hidden></div><a class="back" href="/">← Voltar ao site</a>
+    </div>
+  </section>
+  <div class="shell" id="adminView" hidden>
+    <aside class="sidebar"><a class="brand" href="/"><span class="mark">〰</span> vozia<span>.</span></a><div class="side-label">ADMINISTRAÇÃO</div>
+      <button class="nav active" data-page="overview"><span>▦</span> Visão geral</button><button class="nav" data-page="jobs"><span>▤</span> Transcrições</button><button class="nav" data-page="settings"><span>⚙</span> Configurações</button><button class="nav" data-page="api"><span>⌘</span> API e documentação</button>
+      <div class="sidebar-bottom"><span class="online"><i></i> Servidor local</span><a href="/app">Abrir Vozia ↗</a><button id="logout">Sair da administração</button></div>
+    </aside>
+    <main class="main"><header><div><div class="crumb">Vozia <span>/</span> Administração</div><h1 id="pageTitle">Visão geral</h1></div><button class="refresh" id="refresh">↻ <span>Atualizar</span></button></header>
+      <div class="alert" id="alert" hidden></div>
+      <section class="page" id="page-overview"><div class="cards"><article class="metric"><span>Total de trabalhos</span><b id="total">—</b><small>transcrições e envios</small></article><article class="metric"><span>Concluídos</span><b id="completed">—</b><small>prontos para consulta</small></article><article class="metric"><span>Na fila</span><b id="queued">—</b><small>aguardando processamento</small></article><article class="metric"><span>Com falha</span><b id="failed">—</b><small>podem ser repetidos</small></article></div>
+        <div class="grid"><article class="card system"><div class="card-head"><div><h2>Estado do servidor</h2><p>Configuração ativa do motor local</p></div><span class="pill"><i></i> ONLINE</span></div><div class="system-row"><span>Motor</span><b>OpenAI Whisper · local</b></div><div class="system-row"><span>Modelo ativo</span><b id="modelValue">—</b></div><div class="system-row"><span>Python</span><b id="pythonValue">—</b></div><div class="system-row"><span>Armazenamento de áudio</span><b id="storage">—</b></div></article>
+        <article class="card"><div class="card-head"><div><h2>Atividade recente</h2><p>Últimos arquivos recebidos</p></div><button class="text-button" data-open="jobs">Ver tudo →</button></div><div class="recent" id="recent"></div></article></div></section>
+      <section class="page" id="page-jobs" hidden><article class="card"><div class="toolbar"><div><h2>Transcrições</h2><p>Pesquise, acompanhe e gerencie trabalhos</p></div><div class="filters"><input id="search" placeholder="Buscar áudio ou projeto…"><select id="statusFilter"><option value="all">Todos os status</option><option value="completed">Concluídos</option><option value="queued">Na fila</option><option value="loading_model">Carregando modelo</option><option value="failed">Com falha</option><option value="uploading">Envios incompletos</option></select></div></div><div class="table-wrap"><table><thead><tr><th>Arquivo / projeto</th><th>Status</th><th>Idioma</th><th>Tamanho</th><th>Recebido em</th><th>Ações</th></tr></thead><tbody id="jobRows"></tbody></table></div><div class="empty" id="empty" hidden>Nenhum trabalho encontrado.</div></article></section>
+      <section class="page" id="page-settings" hidden><article class="card settings-card"><div class="card-head"><div><h2>Motor de transcrição</h2><p>O modelo é baixado localmente na primeira utilização.</p></div></div><form id="settingsForm"><label for="modelSelect">Modelo Whisper</label><div class="form-row"><select id="modelSelect"></select><button class="primary">Salvar configuração</button></div><div class="hint">Modelos maiores podem oferecer melhor precisão, mas exigem mais memória e processamento. A alteração vale para as próximas transcrições.</div></form></article>
+      <article class="card settings-card"><div class="card-head"><div><h2>Segurança da administração</h2><p>Altere a senha de acesso ao painel.</p></div></div><form id="passwordForm"><label for="currentPassword">Senha atual</label><input id="currentPassword" type="password" autocomplete="current-password" required><label for="newPassword">Nova senha</label><input id="newPassword" type="password" minlength="14" autocomplete="new-password" required><div class="hint">Use pelo menos 14 caracteres. Após salvar, entre novamente com a nova senha.</div><button class="primary">Alterar senha</button></form></article></section>
+      <section class="page" id="page-api" hidden><article class="card"><div class="card-head"><div><h2>API Vozia</h2><p>Endpoints disponíveis para integrar upload e consulta de transcrições.</p></div><span class="api-base">Base: <code>/api</code></span></div><div class="api-list" id="apiList"></div><div class="api-note">Os endpoints de upload e consulta são locais e não exigem login de administrador. Proteja o servidor com HTTPS e autenticação própria antes de expor a API publicamente.</div></article></section>
+    </main>
+  </div>
+  <script src="admin.js"></script>
+</body>
+</html>

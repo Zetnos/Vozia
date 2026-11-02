@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#101212" />
+  <title>Vozia — Transcrição de áudio</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='3' y='3' width='58' height='58' rx='16' fill='%23101212' stroke='%23343a35' stroke-width='2'/%3E%3Cg fill='%23cbee3f'%3E%3Crect x='14' y='25' width='5' height='14' rx='2.5'/%3E%3Crect x='23' y='17' width='5' height='30' rx='2.5'/%3E%3Crect x='32' y='10' width='5' height='44' rx='2.5'/%3E%3Crect x='41' y='20' width='5' height='24' rx='2.5'/%3E%3Crect x='50' y='27' width='4' height='10' rx='2'/%3E%3C/g%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="transcript.css" />
+  <link rel="stylesheet" href="theme.css?v=3" />
+  <link rel="stylesheet" href="pages.css?v=1" />
+</head>
+<body class="vozia-app">
+  <aside class="sidebar">
+    <a class="brand" href="/" aria-label="Vozia, início"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span>vozia<span class="brand-dot">.</span></span></a>
+    <div class="workspace-label">ESPAÇO DE TRABALHO</div>
+    <nav class="workspace-nav" aria-label="Navegação do espaço">
+      <a class="nav-item active" href="/app"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span><span>Visão geral</span></a>
+      <a class="nav-item" href="/workspace"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span><span>Transcrições</span></a>
+      <a class="nav-item" href="/workspace?filter=favorites"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9L12 3Z"/></svg></span><span>Favoritos</span></a>
+    </nav>
+    <div class="sidebar-section-label">RECURSOS</div>
+    <nav class="workspace-nav" aria-label="Recursos">
+      <a class="nav-item" href="/plans"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6.5 12 3l8 3.5v11L12 21l-8-3.5v-11Z"/><path d="m4.5 7 7.5 3.5L19.5 7M12 10.5V21"/></svg></span><span>Planos</span></a>
+      <a class="nav-item" href="/help"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.7 9a2.4 2.4 0 1 1 4.1 1.7c-1.2 1.1-1.8 1.4-1.8 3M12 17.3h.01"/></svg></span><span>Central de ajuda</span></a>
+    </nav>
+    <div class="sidebar-spacer"></div>
+    <div class="local-status"><span class="status-pulse"></span><div><b>Whisper no servidor</b><small>Processamento no servidor</small></div></div>
+    <div class="side-bottom"><a class="profile" href="/profile"><span class="avatar" id="sidebarAvatar">V</span><span><b id="sidebarName">Meu perfil</b><small>Conta Vozia</small></span><span class="profile-chevron" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></span></a></div>
+  </aside>
+  <main class="app-main">
+    <header class="topbar"><div class="breadcrumb"><a href="/">Vozia</a><span>/</span><b id="routeTitle">Visão geral</b></div><div class="top-actions"><a class="help" href="/help"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.7 9a2.4 2.4 0 1 1 4.1 1.7c-1.2 1.1-1.8 1.4-1.8 3M12 17.3h.01"/></svg><span>Ajuda</span></a><a class="upgrade" href="/plans">Ver planos <span aria-hidden="true">↗</span></a></div></header>
+    <section id="routeView" class="route-view" hidden></section>
+    <section class="content dashboard-content">
+      <div class="dashboard-heading"><div><h1 id="dashboardGreeting">Seu espaço de trabalho</h1><p class="intro">Gerencie suas gravações e transforme novas conversas em texto.</p></div><a class="new-transcription" href="#nova-transcricao"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Nova transcrição</a></div>
+
+      <section class="dashboard-metrics" aria-label="Resumo da sua atividade">
+        <article class="dashboard-metric"><span class="metric-label">TRANSCRIÇÕES</span><div><b id="dashboardTotal">0</b><span class="metric-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v13H7zM14 3v6h5M10 13h6m-6 4h6"/></svg></span></div><small><i class="metric-dot"></i> no seu espaço de trabalho</small></article>
+        <article class="dashboard-metric"><span class="metric-label">CONCLUÍDAS</span><div><b id="dashboardCompleted">0</b><span class="metric-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span></div><small><i class="metric-dot"></i> prontas para revisar</small></article>
+        <article class="dashboard-metric"><span class="metric-label">EM ANDAMENTO</span><div><b id="dashboardProcessing">0</b><span class="metric-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h3l2.5-7 5 14 2.5-7h3"/></svg></span></div><small><i class="metric-dot"></i> aguardando ou processando</small></article>
+        <article class="dashboard-metric"><span class="metric-label">ARMAZENAMENTO</span><div><b id="dashboardStorage">0 MB</b><span class="metric-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></span></div><small><i class="metric-dot"></i> arquivos neste servidor</small></article>
+      </section>
+
+      <section class="dashboard-overview">
+        <article class="activity-card"><div class="panel-heading"><div><h2>Atividade recente</h2><p>Visão geral das transcrições do seu espaço</p></div><a href="/workspace">Ver transcrições <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a></div><div class="activity-chart" id="activityChart"><div class="chart-y-labels" id="chartYLabels"><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span></div><svg class="chart-svg" viewBox="0 0 720 180" preserveAspectRatio="none" role="img" aria-label="Atividade real das transcrições nos últimos sete dias"><defs><linearGradient id="chartFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#cbee3f" stop-opacity=".22"/><stop offset="1" stop-color="#cbee3f" stop-opacity="0"/></linearGradient></defs><path id="chartArea" class="chart-area" d=""/><path id="chartLine" class="chart-line" d=""/><g id="chartPoints"></g></svg><div class="chart-x-labels" id="chartXLabels"></div><div class="chart-empty" id="chartEmpty">As transcrições dos últimos sete dias aparecerão neste gráfico.</div></div><div class="chart-foot"><span><i></i> Arquivos recebidos</span><span id="chartPeriod">Últimos 7 dias</span></div></article>
+        <article class="server-card"><div class="panel-heading"><div><h2>Seu motor de transcrição</h2><p>Processamento no servidor local</p></div><span class="engine-status"><i></i> ATIVO</span></div><div class="engine-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="engine-details"><span>Modelo</span><b>OpenAI Whisper</b><span>Arquivos grandes</span><b>Envio em partes</b></div><a class="engine-link" href="/help">Como funciona o processamento <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a></article>
+      </section>
+
+      <section class="work-grid" id="nova-transcricao">
+        <article class="upload-workspace">
+          <div class="work-heading"><div><span class="section-kicker">COMECE POR AQUI</span><h2>Nova transcrição</h2><p>Envie áudio ou vídeo e acompanhe cada fala com seu tempo marcado.</p></div><span class="private-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 1 1 8 0v3"/></svg>Local</span></div>
+          <div class="workflow"><div class="step active-step"><span>1</span><b>Enviar arquivo</b></div><div class="step-line"></div><div class="step"><span>2</span><b>Idioma</b></div><div class="step-line"></div><div class="step"><span>3</span><b>Transcrição</b></div></div>
+          <div class="upload-box" id="dropzone" tabindex="0" role="button" aria-label="Escolher ou arrastar arquivo de áudio">
+        <input id="fileInput" type="file" accept="audio/*,video/*,.mp3,.wav,.m4a,.mp4,.aac,.ogg,.flac,.webm" hidden />
+        <div class="upload-art"><div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="upload-arrow">↑</span></div>
+        <h2>Solte seu arquivo aqui</h2><p>ou <button class="browse" id="browse">escolha do computador</button></p>
+        <div class="formats">MP3 · WAV · M4A · MP4 · AAC · OGG · FLAC</div>
+        <div class="size-note"><span>↗</span> Arquivos grandes também são bem-vindos <b>mais de 100 MB</b></div>
+          </div>
+
+      <div class="file-panel" id="filePanel" hidden>
+        <div class="file-type">♫</div><div class="file-info"><b id="fileName"></b><span id="fileMeta"></span><div class="progress-track"><i id="progressBar"></i></div><small id="uploadStatus">Arquivo pronto para enviar</small></div><button class="remove" id="removeFile" aria-label="Remover arquivo">×</button>
+      </div>
+
+      <div class="settings-row"><label class="setting"><span class="label">IDIOMA DO ÁUDIO</span><span class="select-wrap"><span class="flag" id="flag">🇧🇷</span><select id="language"><option value="pt-BR">Português (Brasil)</option><option value="en-US">English (US)</option><option value="es-ES">Español</option><option value="fr-FR">Français</option><option value="de-DE">Deutsch</option><option value="it-IT">Italiano</option><option value="ja-JP">日本語</option><option value="auto">Detectar automaticamente</option></select><span class="select-arrow">⌄</span></span></label><label class="setting"><span class="label">NOME DO PROJETO</span><input id="projectName" value="Minha transcrição" /></label></div>
+      <div class="actions"><span class="secure"><span>⌑</span> Seus arquivos são privados e seguros</span><button id="transcribe" disabled>Transcrever áudio <span>→</span></button></div>
+      <div class="notice" id="notice" role="status" hidden></div>
+      <section class="transcript-panel" id="transcriptPanel" hidden>
+        <div class="transcript-sync">
+          <article class="player-card" id="playerCard">
+            <header class="player-card-head"><div><small>ARQUIVO ORIGINAL</small><b>Player de mídia</b></div><span class="player-live"><i></i> Sincronizado</span></header>
+            <div class="media-wrap" id="playerShell">
+              <video id="videoPlayer" playsinline preload="metadata" hidden aria-label="Vídeo original"><track id="videoCaptions" kind="subtitles" label="Legendas" default></video>
+              <button id="overlayPlay" class="video-play-overlay" type="button" aria-label="Reproduzir vídeo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.8c0-.8.9-1.3 1.6-.9l9.1 6.1a1.2 1.2 0 0 1 0 2l-9.1 6.1c-.7.4-1.6-.1-1.6-.9V5.8Z"/></svg></button>
+              <div id="audioVisual" class="audio-visual" hidden><div class="audio-orb">♫</div><b>Áudio original</b><span>Reproduza e acompanhe a transcrição</span><div class="audio-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+              <audio id="audioPlayer" preload="metadata" hidden aria-label="Áudio original"></audio>
+              <div id="mediaEmpty" class="media-empty">Prévia de mídia indisponível</div>
+              <div class="player-controls" id="playerControls" hidden>
+                <div class="control-main"><button class="skip-control" id="skipBack" type="button" aria-label="Voltar 10 segundos" title="Voltar 10 segundos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8V3m0 5h5M4.5 8a8 8 0 1 1-.8 7"/></svg><small>10</small></button><button class="play-toggle" id="playToggle" aria-label="Reproduzir" title="Reproduzir"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.8c0-.8.9-1.3 1.6-.9l9.1 6.1a1.2 1.2 0 0 1 0 2l-9.1 6.1c-.7.4-1.6-.1-1.6-.9V5.8Z"/></svg></button><button class="skip-control" id="skipForward" type="button" aria-label="Avançar 10 segundos" title="Avançar 10 segundos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 8V3m0 5h-5m4.5 0a8 8 0 1 0 .8 7"/></svg><small>10</small></button><span class="player-time" id="timeCurrent">00:00</span><input id="seekBar" class="seek-bar" type="range" min="0" max="1000" value="0" aria-label="Posição da reprodução"><span class="player-time" id="timeTotal">00:00</span><button class="icon-control captions-toggle active" id="captionsToggle" type="button" aria-label="Desativar legendas" aria-pressed="true" title="Legendas ativadas"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M7 10h4m-4 4h3m4-4h3m-3 4h3"/></svg></button><button class="icon-control" id="fullscreenToggle" aria-label="Tela cheia" title="Tela cheia"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3M3 16v3a2 2 0 0 0 2 2h3m8 0h3a2 2 0 0 0 2-2v-3"/></svg></button></div>
+                <div class="control-extra"><label class="volume-control" title="Volume"><button class="volume-toggle" id="volumeToggle" aria-label="Silenciar áudio" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h4l5 4V6l-5 4H4Zm12-2a6 6 0 0 1 0 8m2-11a10 10 0 0 1 0 14"/></svg></button><input id="volumeSlider" type="range" min="0" max="1" step="0.05" value="1" aria-label="Volume"></label><label class="speed-control">Velocidade<select id="speedSelect" aria-label="Velocidade de reprodução"><option value="0.75">0,75×</option><option value="1" selected>1×</option><option value="1.25">1,25×</option><option value="1.5">1,5×</option><option value="2">2×</option></select></label></div>
+              </div>
+              <div class="player-hint"><span class="hint-mark">✦</span><div><b>Reprodução sincronizada</b><small>Clique em uma fala para ir direto ao trecho</small></div></div>
+            </div>
+          </article>
+          <article class="transcript-content">
+            <header class="transcript-card-head"><div><small>TRANSCRIÇÃO</small><b>Texto por fala</b></div><span class="segment-count" id="segmentCount"></span></header>
+            <div class="transcript-tools"><a id="downloadSrt" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 17v3h16v-3"/></svg>Baixar .SRT</a><button id="copyTranscript"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg>Copiar texto</button></div>
+            <div class="transcript-list"><div id="transcriptSegments" class="transcript-segments" hidden></div><pre id="transcriptText"></pre></div>
+          </article>
+        </div>
+      </section>
+        </article>
+        <article class="recent-card"><div class="panel-heading"><div><h2>Arquivos recentes</h2><p>Volte rapidamente ao que estava fazendo</p></div><a href="/workspace" aria-label="Ver todas as transcrições"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a></div><div class="recent-dashboard-list" id="dashboardRecent"><div class="recent-empty"><span class="empty-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><b>Suas gravações aparecem aqui</b><p>Quando enviar um arquivo, você poderá acompanhar seu status e abrir a transcrição por aqui.</p></div></div><a class="all-transcriptions" href="/workspace">Ir para todas as transcrições <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a></article>
+      </section>
+      <div class="bottom-note"><span class="note-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span> Arquivos grandes enviados em partes de 8 MB. Suas gravações são processadas pelo Whisper no servidor.</div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+  <script src="pages.js?v=2"></script>
+</body>
+</html>
