@@ -13,8 +13,11 @@
   const secondary = document.querySelector('#secondaryLink');
   const forgot = document.querySelector('#forgotLink');
   const back = document.querySelector('#backLink');
+  const formKicker = document.querySelector('#formKicker');
+  const nameInput = form.elements.name;
   const emailInput = form.elements.email;
   const passwordInput = form.elements.password;
+  const confirmInput = form.elements.confirmPassword;
   const params = new URLSearchParams(location.search);
   const nextPath = params.get('next');
   const next = nextPath && nextPath.startsWith('/') && !nextPath.startsWith('//') ? nextPath : '/app';
@@ -28,20 +31,43 @@
   };
   const route = routes[page];
   if (!route) return;
+  const kickers = { login: 'BEM-VINDO DE VOLTA', register: 'COMECE COM A VOZIA', 'forgot-password': 'RECUPERE SEU ACESSO', 'reset-password': 'QUASE LÁ' };
+  formKicker.textContent = kickers[page] || 'SUA CONTA VOZIA';
   title.textContent = route.title;
   description.textContent = route.description;
   submit.firstChild.textContent = `${route.button} `;
   hide(nameField, !route.showName);
   hide(passwordField, !route.showPassword);
   hide(confirmField, !route.showConfirm);
+  nameInput.required = Boolean(route.showName);
   passwordInput.required = Boolean(route.showPassword);
   emailInput.required = page !== 'reset-password';
+  document.querySelector('#passwordHint').textContent = page === 'register' || page === 'reset-password' ? 'Pelo menos 8 caracteres. Use uma senha que você ainda não usa em outro serviço.' : 'A senha precisa ter pelo menos 8 caracteres.';
   if (route.secondary) { secondary.textContent = route.secondary[0]; secondary.href = route.secondary[1]; }
   else hide(secondary, true);
   hide(forgot, !route.forgot);
   hide(back, page !== 'reset-password');
   if (page === 'register') passwordInput.autocomplete = 'new-password';
   if (params.has('confirmed')) showNotice('E-mail confirmado. Entre para abrir seu espaço.');
+
+  for (const toggle of document.querySelectorAll('[data-password-toggle]')) {
+    toggle.addEventListener('click', () => {
+      const input = form.elements[toggle.dataset.passwordToggle];
+      const reveal = input.type === 'password';
+      input.type = reveal ? 'text' : 'password';
+      toggle.setAttribute('aria-label', reveal ? 'Ocultar senha' : 'Mostrar senha');
+      toggle.title = reveal ? 'Ocultar senha' : 'Mostrar senha';
+    });
+  }
+  const wave = document.querySelector('.signal-wave');
+  for (let i = 0; i < 54; i++) {
+    const bar = document.createElement('i');
+    const envelope = .28 + .72 * Math.abs(Math.sin(i * .21));
+    const peak = Math.abs(Math.sin(i * 1.37) * Math.cos(i * .31));
+    bar.style.setProperty('--wave-height', `${Math.max(6, Math.round((7 + peak * 39) * envelope))}px`);
+    bar.style.setProperty('--wave-delay', `${-(i % 11) * 95}ms`);
+    wave.appendChild(bar);
+  }
 
   async function acceptAuthHash() {
     if (!location.hash) return;
@@ -67,6 +93,8 @@
     event.preventDefault();
     notice.hidden = true;
     submit.disabled = true;
+    submit.setAttribute('aria-busy', 'true');
+    submit.firstChild.textContent = ({ login: 'Entrando ', register: 'Criando conta ', 'forgot-password': 'Enviando link ', 'reset-password': 'Salvando senha ' })[page] || 'Aguarde ';
     const values = new FormData(form);
     const email = String(values.get('email') || '').trim();
     const password = String(values.get('password') || '');
@@ -95,6 +123,8 @@
       showNotice(message, 'error');
     } finally {
       submit.disabled = false;
+      submit.removeAttribute('aria-busy');
+      submit.firstChild.textContent = `${route.button} `;
     }
   });
 })();

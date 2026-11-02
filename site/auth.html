@@ -6,27 +6,44 @@
 </head>
 <body data-page="__AUTH_PAGE__">
   <main class="auth-layout">
-    <a class="auth-brand" href="/" aria-label="Vozia, início"><span class="brand-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>Vozia</a>
-    <section class="auth-card" aria-labelledby="authTitle">
-      <span class="auth-kicker">SEU ESPAÇO, EM TODOS OS DISPOSITIVOS</span>
-      <h1 id="authTitle">Entre na sua conta</h1>
-      <p class="auth-description" id="authDescription">Acesse suas transcrições e continue de onde parou.</p>
-      <div class="auth-notice" id="authNotice" role="status" aria-live="polite" hidden></div>
-      <form id="authForm" novalidate>
-        <label id="nameField" hidden>Nome de exibição<input name="name" autocomplete="name" maxlength="80" placeholder="Seu nome"></label>
-        <label id="emailField">E-mail<input name="email" type="email" autocomplete="email" required placeholder="voce@exemplo.com"></label>
-        <label id="passwordField">Senha<input name="password" type="password" autocomplete="current-password" minlength="8" required placeholder="Mínimo de 8 caracteres"></label>
-        <label id="confirmField" hidden>Confirmar nova senha<input name="confirmPassword" type="password" autocomplete="new-password" minlength="8" placeholder="Repita sua nova senha"></label>
-        <button class="auth-submit" id="authSubmit" type="submit">Entrar <span aria-hidden="true">→</span></button>
-      </form>
-      <nav class="auth-links" aria-label="Opções da conta">
-        <a id="secondaryLink" href="/register">Criar uma conta</a>
-        <a id="forgotLink" href="/forgot-password">Esqueci minha senha</a>
-        <a id="backLink" href="/login" hidden>Voltar para entrar</a>
-      </nav>
-      <p class="auth-footnote">Sua conta e seus arquivos são protegidos por políticas de acesso individuais.</p>
-    </section>
-    <footer>Vozia · Áudio entra. Inteligência sai.</footer>
+    <header class="auth-top">
+      <a class="auth-brand" href="/" aria-label="Vozia, início"><span class="brand-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>Vozia</a>
+      <a class="home-link" href="/">Voltar ao site <span aria-hidden="true">↗</span></a>
+    </header>
+    <div class="auth-content">
+      <section class="auth-story" aria-label="Seu espaço de transcrição">
+        <span class="auth-kicker"><i aria-hidden="true"></i> ÁUDIO ORGANIZADO. IDEIAS À MÃO.</span>
+        <h2>Suas conversas<br>seguem com você.</h2>
+        <p>Entre para encontrar transcrições, retomar revisões e transformar cada gravação em algo fácil de consultar.</p>
+        <div class="signal-card" aria-label="Prévia ilustrativa de uma gravação transcrita">
+          <div class="signal-head"><span><i aria-hidden="true"></i> PRÉVIA DA GRAVAÇÃO</span><time>00:18</time></div>
+          <div class="signal-wave" aria-hidden="true"></div>
+          <p>“A conversa fica organizada e pronta para continuar o trabalho.”</p>
+          <div class="signal-foot"><span>Transcrição sincronizada</span><span class="signal-language">PT · BR</span></div>
+        </div>
+        <div class="auth-benefits"><span><b aria-hidden="true">✓</b> Seus arquivos no mesmo lugar</span><span><b aria-hidden="true">✓</b> Acesso protegido à sua conta</span></div>
+      </section>
+      <section class="auth-card" aria-labelledby="authTitle">
+        <span class="auth-kicker" id="formKicker">BEM-VINDO DE VOLTA</span>
+        <h1 id="authTitle">Entre na sua conta</h1>
+        <p class="auth-description" id="authDescription">Acesse suas transcrições e continue de onde parou.</p>
+        <div class="auth-notice" id="authNotice" role="status" aria-live="polite" hidden></div>
+      <form id="authForm">
+          <label id="nameField" hidden>Nome<input name="name" autocomplete="name" maxlength="80" placeholder="Como devemos chamar você?"></label>
+          <label id="emailField">E-mail<input name="email" type="email" autocomplete="email" required placeholder="voce@exemplo.com"></label>
+          <label id="passwordField">Senha<span class="password-control"><input name="password" type="password" autocomplete="current-password" minlength="8" required placeholder="Sua senha"><button type="button" class="password-toggle" data-password-toggle="password" aria-label="Mostrar senha" title="Mostrar senha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.5"/></svg></button></span><small class="field-hint" id="passwordHint">Use pelo menos 8 caracteres.</small></label>
+          <label id="confirmField" hidden>Confirmar nova senha<span class="password-control"><input name="confirmPassword" type="password" autocomplete="new-password" minlength="8" placeholder="Digite a senha novamente"><button type="button" class="password-toggle" data-password-toggle="confirmPassword" aria-label="Mostrar confirmação da senha" title="Mostrar senha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.5"/></svg></button></span></label>
+          <button class="auth-submit" id="authSubmit" type="submit">Entrar <span aria-hidden="true">→</span></button>
+        </form>
+        <nav class="auth-links" aria-label="Opções da conta">
+          <a id="secondaryLink" href="/register">Criar uma conta</a>
+          <a id="forgotLink" href="/forgot-password">Esqueci minha senha</a>
+          <a id="backLink" href="/login" hidden>Voltar para entrar</a>
+        </nav>
+        <p class="auth-footnote"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 10V7a6 6 0 0 1 12 0v3M5 10h14v11H5z"/><path d="M12 14v3"/></svg> Seus dados são privados e protegidos.</p>
+      </section>
+    </div>
+    <footer><span>© 2026 Vozia</span><span>Áudio entra. Inteligência sai.</span></footer>
   </main>
   <script src="/vozia-config.js"></script>
   <script src="/supabase-client.js"></script>
